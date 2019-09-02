@@ -8,8 +8,9 @@ class AddProjectTask extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8 m-auto">
-                        <Link to="/" href="/ProjectBoard.html" className="btn btn-light">
-                            Back to Board
+                        <Link to="/" href="/ProjectBoard.html" className="btn btn-primary">
+                            <i className="fas fa-arrow-left"></i>
+                            <i className=""> Back to Board</i>                            
                         </Link>
                         <h4 className="display-4 text-center">Add /Update Project Task</h4>
                         <form>
