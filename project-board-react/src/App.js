@@ -10,8 +10,8 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
-        <Route exact path="/" component={ProjectBoard} />s
+        <Navbar /> 
+        <Route exact path="/" component={ProjectBoard} />
         <Route exact path="/addProjectTask" component={AddProjectTask} />
       </div>
     </Router>
