@@ -15,13 +15,13 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/board")
-@CrossOrigin                            //React Access
+@CrossOrigin                            //React app Access
 public class ProjectTaskController {
 
     @Autowired
     ProjectTaskService projectTaskService;
 
-    @PostMapping("")
+    @PostMapping("/create")
     public ResponseEntity<?> addProjectTaskToBoard(@Valid @RequestBody ProjectTask projectTask, BindingResult result) {
         if(result.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>();
