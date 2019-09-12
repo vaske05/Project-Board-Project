@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { addProjectTask } from "../../actions/projectTaskActions";
+import classnames from "classnames";
 
 class AddProjectTask extends Component {
     constructor() {
@@ -26,57 +31,73 @@ class AddProjectTask extends Component {
             acceptanceCriteria: this.state.acceptanceCriteria,
             status: this.state.status
         };
-        console.log(newProjectTask);
+        // console.log(newProjectTask);
+        this.props.addProjectTask(newProjectTask, this.props.history);
+
     }
 
     render() {
         return (
             <div className="addProjectTask">
-            <div className="container">
-                <div className="row">
-                    <div className="col-md-8 m-auto">
-                        <Link to="/" href="/ProjectBoard.html" className="btn btn-primary">
-                            <i className="fas fa-arrow-left"></i>
-                            <i className=""> Back to Board</i>                            
-                        </Link>
-                        <h4 className="display-4 text-center">Add /Update Project Task</h4>
-                        <form className="form" onSubmit={this.onSubmit}>
-                            <div className="form-group">
-                                <input 
-                                type="text" 
-                                className="form-control form-control-lg" 
-                                name="summary" 
-                                value={this.state.summary}
-                                onChange={this.onChange}
-                                placeholder="Project Task summary" />
-                            </div>
-                            <div className="form-group">
-                                <textarea 
-                                className="form-control form-control-lg" 
-                                placeholder="Acceptance Criteria" 
-                                name="acceptanceCriteria"
-                                value={this.state.acceptanceCriteria}
-                                onChange={this.onChange}
-                                ></textarea>
-                            </div>
-                            <div className="form-group">
-                                <select className="form-control form-control-lg" name="status" value={this.state.status} 
-                                  onChange={this.onChange} >
-                                    <option value="">Select Status</option>
-                                    <option value="TO_DO">TO DO</option>
-                                    <option value="IN_PROGRESS">IN PROGRESS</option>
-                                    <option value="DONE">DONE</option>
-                                </select>
-                            </div>
-                            <input type="submit" className="btn btn-primary btn-block mt-4" />
-                        </form>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-8">
+                            <Link to="/" href="/ProjectBoard.html" className="btn btn-primary">
+                                <i className="fas fa-arrow-left"></i>
+                                <i className=""> Back to Board</i>
+                            </Link>
+                        </div>
+                        <div className="col-md-8 m-auto">
+                            <h4 className="display-4 text-center">Add /Update Project Task</h4>
+                            <form className="form" onSubmit={this.onSubmit}>
+                                <div className="form-group">
+                                    <input
+                                        type="text"
+                                        className="form-control form-control-lg"
+                                        name="summary"
+                                        value={this.state.summary}
+                                        onChange={this.onChange}
+                                        placeholder="Project Task summary" />
+                                </div>
+                                <div className="form-group">
+                                    <textarea
+                                        className="form-control form-control-lg"
+                                        placeholder="Acceptance Criteria"
+                                        name="acceptanceCriteria"
+                                        value={this.state.acceptanceCriteria}
+                                        onChange={this.onChange}
+                                    ></textarea>
+                                </div>
+                                <div className="form-group">
+                                    <select className="form-control form-control-lg" name="status" value={this.state.status}
+                                        onChange={this.onChange} >
+                                        <option value="">Select Status</option>
+                                        <option value="TO_DO">TO DO</option>
+                                        <option value="IN_PROGRESS">IN PROGRESS</option>
+                                        <option value="DONE">DONE</option>
+                                    </select>
+                                </div>
+                                <input type="submit" className="btn btn-primary btn-block mt-4" />
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    
-        )
+
+        );
     }
 }
 
-export default AddProjectTask;
+
+
+
+AddProjectTask.propTypes = {
+    addProjectTask: PropTypes.func.isRequired
+    //errors: PropTypes.object.isRequired 
+}
+
+const mapStateToProps = state => ({
+    errors: state.errors
+})
+
+export default connect(null, { addProjectTask })(AddProjectTask); //Connect to a store
