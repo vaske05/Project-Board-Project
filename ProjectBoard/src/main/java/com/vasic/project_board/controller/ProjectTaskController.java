@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/board")
@@ -20,6 +22,8 @@ public class ProjectTaskController {
 
     @Autowired
     ProjectTaskService projectTaskService;
+
+    private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
 
     @PostMapping("/create")
     public ResponseEntity<?> addProjectTaskToBoard(@Valid @RequestBody ProjectTask projectTask, BindingResult result) {
@@ -33,6 +37,7 @@ public class ProjectTaskController {
             return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
         }
         ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(projectTask);
+        LOGGER.log(Level.INFO, "Project task - created");
         return new ResponseEntity<ProjectTask>(newProjectTask, HttpStatus.CREATED);
     }
 
