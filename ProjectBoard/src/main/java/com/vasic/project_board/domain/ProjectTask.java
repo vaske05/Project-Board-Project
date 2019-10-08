@@ -12,7 +12,7 @@ public class ProjectTask {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Summary cannot be blank")
+    @NotBlank(message = "Summary cannot be blank!")
     private String summary;
     private String acceptanceCriteria;
     private String status;
