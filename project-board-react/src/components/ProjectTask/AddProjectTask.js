@@ -12,10 +12,17 @@ class AddProjectTask extends Component {
         this.state = {
             summary: "",
             acceptanceCriteria: "",
-            status: ""
+            status: "",
+            errors: {}
         };
         this.onChange = this.onChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
     }
 
 
@@ -37,6 +44,7 @@ class AddProjectTask extends Component {
     }
 
     render() {
+        const { errors } = this.state;
         return (
             <div className="addProjectTask">
                 <div className="container">
@@ -48,16 +56,22 @@ class AddProjectTask extends Component {
                             </Link>
                         </div>
                         <div className="col-md-8 m-auto">
-                            <h4 className="display-4 text-center">Add /Update Project Task</h4>
+                            <h4 className="display-4 text-center">Add / Update Project Task</h4>
                             <form className="form" onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input
                                         type="text"
-                                        className="form-control form-control-lg"
+                                        className={classnames("form-control form-control-lg", {
+                                            "is-invalid": errors.summary
+                                        })}
                                         name="summary"
                                         value={this.state.summary}
                                         onChange={this.onChange}
                                         placeholder="Project Task summary" />
+                                        { errors.summary &&
+                                            <div className="invalid-feedback">{errors.summary}</div>
+                                        }
+                                        
                                 </div>
                                 <div className="form-group">
                                     <textarea
@@ -92,12 +106,13 @@ class AddProjectTask extends Component {
 
 
 AddProjectTask.propTypes = {
-    addProjectTask: PropTypes.func.isRequired
-    //errors: PropTypes.object.isRequired 
+    addProjectTask: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired 
 }
 
 const mapStateToProps = state => ({
     errors: state.errors
 })
 
-export default connect(null, { addProjectTask })(AddProjectTask); //Connect to a store
+//Connect React component to a Redux store.
+export default connect(mapStateToProps, { addProjectTask })(AddProjectTask); 
