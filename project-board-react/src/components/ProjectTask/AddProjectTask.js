@@ -97,13 +97,9 @@ class AddProjectTask extends Component {
                     </div>
                 </div>
             </div>
-
         );
     }
 }
-
-
-
 
 AddProjectTask.propTypes = {
     addProjectTask: PropTypes.func.isRequired,
@@ -112,7 +108,7 @@ AddProjectTask.propTypes = {
 
 const mapStateToProps = state => ({
     errors: state.errors
-})
+});
 
 //Connect React component to a Redux store.
-export default connect(mapStateToProps, { addProjectTask })(AddProjectTask); 
+export default connect(mapStateToProps, { addProjectTask }) (AddProjectTask); 
