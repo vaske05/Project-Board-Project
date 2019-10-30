@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addProjectTask } from "../../actions/projectTaskActions";
 import classnames from "classnames";
+import { addProjectTask } from "../../actions/projectTaskActions";
 
 class AddProjectTask extends Component {
     constructor() {
@@ -24,7 +23,6 @@ class AddProjectTask extends Component {
             this.setState({ errors: nextProps.errors });
         }
     }
-
 
     onChange(e) {
         this.setState({ [e.target.name]: e.target.value });
@@ -56,7 +54,7 @@ class AddProjectTask extends Component {
                             </Link>
                         </div>
                         <div className="col-md-8 m-auto">
-                            <h4 className="display-4 text-center">Add / Update Project Task</h4>
+                            <h4 className="display-4 text-center">Add Project Task</h4>
                             <form className="form" onSubmit={this.onSubmit}>
                                 <div className="form-group">
                                     <input
