@@ -1,13 +1,12 @@
 package com.vasic.project_board.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Project {
@@ -15,15 +14,25 @@ public class Project {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@NotBlank(message = "Project name is required")
 	private String projectName;
+
+	@NotBlank(message = "Project Identifier is required")
+	@Size(min = 4, max = 5, message = "Please use 4 to 5 characters")
+	@Column(updatable = true, unique = true)
 	private String projectIdentifier;
+
+	@NotBlank(message = "Project description is required")
 	private String description;
-	
+
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date startDate;
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date endDate;
-	
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date createdAt;
+	@JsonFormat(pattern = "yyyy-mm-dd")
 	private Date updatedAt;
 	
 	public Project() {
