@@ -22,7 +22,7 @@ public class ProjectController {
     @Autowired
     ValidationErrorService errorService;
 
-    @PostMapping("/create")
+    @PostMapping("/")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
         ResponseEntity<?>errorMap = errorService.validateFields(result);
@@ -37,11 +37,18 @@ public class ProjectController {
         return projectService.findAllProjects();
     }
 
-    @GetMapping("{projectId}")
+    @GetMapping("/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
 
         Project project = projectService.findProjectByIdentifier(projectId);
 
         return new ResponseEntity<Project>(project, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{projectId}")
+    public ResponseEntity<?> deleteProject(@PathVariable String projectId) {
+        projectService.deleteProjectByIdentifier(projectId);
+
+        return new ResponseEntity<String>("Project with ID: '" + projectId + "' was deleted.", HttpStatus.OK);
     }
 }
