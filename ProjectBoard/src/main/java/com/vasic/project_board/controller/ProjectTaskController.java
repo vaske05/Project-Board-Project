@@ -63,5 +63,4 @@ public class ProjectTaskController {
 
         return new ResponseEntity<String>("Project task deleted", HttpStatus.OK);
     }
-
 }

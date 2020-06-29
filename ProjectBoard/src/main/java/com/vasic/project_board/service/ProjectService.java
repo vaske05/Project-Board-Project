@@ -12,7 +12,7 @@ public class ProjectService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public Iterable<Project> findAll() {
+    public Iterable<Project> findAllProjects() {
         return projectRepository.findAll();
     }
 
