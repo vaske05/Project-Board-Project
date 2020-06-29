@@ -38,6 +38,7 @@ public class ProjectTaskController {
         }
         ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(projectTask);
         LOGGER.log(Level.INFO, "Project task - created: summary = " + newProjectTask.getSummary());
+
         return new ResponseEntity<ProjectTask>(newProjectTask, HttpStatus.CREATED);
     }
 
@@ -48,6 +49,7 @@ public class ProjectTaskController {
 
     @GetMapping("/update/{pt_id}")
     public ResponseEntity<?> getProjectTaskById(@PathVariable Long pt_id) {
+
         ProjectTask projectTask = projectTaskService.findById(pt_id);
 
         return new ResponseEntity<ProjectTask>(projectTask, HttpStatus.OK);
@@ -55,8 +57,10 @@ public class ProjectTaskController {
 
     @DeleteMapping("/delete/{pt_id}")
     public ResponseEntity<?> deleteProjectTask(@PathVariable Long pt_id) {
+
         projectTaskService.delete(pt_id);
         LOGGER.log(Level.INFO, "Project task - deleted: id = " + pt_id);
+
         return new ResponseEntity<String>("Project task deleted", HttpStatus.OK);
     }
 

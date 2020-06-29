@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.vasic.project_board.domain.Project;
 import com.vasic.project_board.service.ProjectService;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.validation.Valid;
 
 @RestController
@@ -33,6 +34,16 @@ public class ProjectController {
 
     @GetMapping("/all")
     public Iterable<Project> findAllProjects(@RequestBody Project project) {
+
         return projectService.findAll();
     }
+
+    @GetMapping("{projectId}")
+    public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
+
+        Project project = projectService.findProjectByIdentifier(projectId);
+
+        return new ResponseEntity<Project>(project, HttpStatus.OK);
+    }
+
 }

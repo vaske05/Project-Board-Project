@@ -17,15 +17,24 @@ public class ProjectService {
     }
 
     public Project saveOrUpdateProject(Project project) {
+
         try {
             project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
             return projectRepository.save(project);
         } catch (Exception e) {
             ProjectIdException projectIdException =
                     new ProjectIdException("Project ID '"+project.getProjectIdentifier()+"' alreday exists ");
-            throw projectIdException;
+            throw projectIdException; // Calling CustomResponseEntityExceptionHandler
+        }
+    }
+
+    public Project findProjectByIdentifier(String projectId) {
+
+        Project project = projectRepository.findByProjectIdentifier(projectId);
+        if(project == null) {
+            throw new ProjectIdException("Project ID '" + projectId + "' does not exist");
         }
 
-
+        return projectRepository.findByProjectIdentifier(projectId.toUpperCase());
     }
 }
