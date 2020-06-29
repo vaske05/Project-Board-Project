@@ -33,9 +33,8 @@ public class ProjectController {
     }
 
     @GetMapping("/all")
-    public Iterable<Project> findAllProjects(@RequestBody Project project) {
-
-        return projectService.findAll();
+    public Iterable<Project> getAllProjects(@RequestBody Project project) {
+        return projectService.findAllProjects();
     }
 
     @GetMapping("{projectId}")
@@ -45,5 +44,4 @@ public class ProjectController {
 
         return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
-
 }
