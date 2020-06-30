@@ -47,7 +47,7 @@ public class ProjectTaskController {
         return projectTaskService.findAll();
     }
 
-    @GetMapping("/update/{pt_id}") // Probaj da popravis ovo i da koristis istu metodu za menjanje i kreiranje kao u ProjectController-u
+    @GetMapping("/get/{pt_id}")
     public ResponseEntity<?> getProjectTaskById(@PathVariable Long pt_id) {
 
         ProjectTask projectTask = projectTaskService.findById(pt_id);
