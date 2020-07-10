@@ -48,7 +48,7 @@ class AddProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
-                            <Link to="/" href="/ProjectBoard.html" className="btn btn-primary">
+                            <Link to="/" href="/ProjectBoard.html" className="btn btn-success">
                                 <i className="fas fa-arrow-left"></i>
                                 <i className=""> Back to Board</i>
                             </Link>
@@ -89,7 +89,7 @@ class AddProjectTask extends Component {
                                         <option value="DONE">DONE</option>
                                     </select>
                                 </div>
-                                <input type="submit" className="btn btn-primary btn-block mt-4" />
+                                <input type="submit" className="btn btn-success btn-block mt-4" />
                             </form>
                         </div>
                     </div>
