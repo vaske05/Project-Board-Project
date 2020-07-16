@@ -48,7 +48,7 @@ class AddProjectTask extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-8">
-                            <Link to="/" href="/ProjectBoard.html" className="btn btn-success">
+                            <Link to="/projectBoard" className="btn btn-success">
                                 <i className="fas fa-arrow-left"></i>
                                 <i className=""> Back to Board</i>
                             </Link>

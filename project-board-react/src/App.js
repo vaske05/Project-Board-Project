@@ -10,6 +10,7 @@ import { Provider } from "react-redux";
 import  store  from "./store";
 import Header from './components/Layout/Header';
 import Dashboard from './components/Dashboard';
+import AddProject from './components/Project/AddProject';
 
 function App() {
   return (
@@ -18,9 +19,10 @@ function App() {
       <Router>
         <div className="App">
           <Header/>
-          <Dashboard></Dashboard>
-            <Route exact path="/projectBoard" component={ProjectBoard} /> 
-          { /* <Route exact path="/addProjectTask" component={AddProjectTask} /> */ }
+          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/addProject" component={AddProject}/>
+          <Route path="/projectBoard" component={ProjectBoard} /> 
+          <Route exact path="/addProjectTask" component={AddProjectTask} />
           { /* <Route exact path="/update/:pt_id" component={UpdateProjectTask} /> */}
         </div>
       </Router>

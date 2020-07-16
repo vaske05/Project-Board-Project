@@ -56,7 +56,7 @@ class UpdateProjectTask extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <Link to="/" className="btn btn-primary">
+                        <Link to="/projectBoard" className="btn btn-primary">
                             <i className="fas fa-arrow-left"></i>
                             <i className=""> Back to Board</i>
                         </Link>
