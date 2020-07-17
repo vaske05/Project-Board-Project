@@ -1,43 +1,111 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 class AddProject extends Component {
-    render() {
-        return (
-            <div class="project">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-8 m-auto">
-                            <h5 class="display-4 text-center">Create / Edit Project form</h5>
-                            <hr />
-                            <form>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg " placeholder="Project Name" />
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-lg" placeholder="Unique Project ID"
-                                        disabled />
-                                </div>
-                                {/* disabled for Edit Only!! remove "disabled" for the Create operation */}
-                                <div class="form-group">
-                                    <textarea class="form-control form-control-lg" placeholder="Project Description"></textarea>
-                                </div>
-                                <h6>Start Date</h6>
-                                <div class="form-group">
-                                    <input type="date" class="form-control form-control-lg" name="start_date" />
-                                </div>
-                                <h6>Estimated End Date</h6>
-                                <div class="form-group">
-                                    <input type="date" class="form-control form-control-lg" name="end_date" />
-                                </div>
 
-                                <input type="submit" class="btn btn-primary btn-block mt-4" />
-                            </form>
-                        </div>
-                    </div>
+    constructor() {
+        super()
+
+        this.state = {
+            projectName:"",
+            projectIdentifier: "",
+            description:"",
+            startDate:"",
+            endDate:""
+        };
+        this.onChange = this.onChange.bind(this); //binding 
+        this.onSubmit = this.onSubmit.bind(this);
+    }
+
+    onChange(e) {
+        this.setState({[e.target.name]: e.target.value});
+    }
+
+    onSubmit(e) {
+        e.preventDefault(); // turn off reload
+        const newProject = {
+            projectName: this.state.projectName,
+            projectIdentifier: this.state.projectIdentifier,
+            description: this.state.description,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate
+        }
+        console.log(newProject);
+    }
+
+  render() {
+    return (
+      <div className="project">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 m-auto">
+              <h5 className="display-4 text-center">
+                Create / Edit Project form
+              </h5>
+              <hr />
+              <form onSubmit={this.onSubmit}>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg "
+                    placeholder="Project Name"
+                    name="projectName"
+                    value={this.state.projectName}
+                    onChange={this.onChange}
+                  />
                 </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="Unique Project ID"
+                    name="projectIdentifier"
+                    value={this.state.projectIdentifier}
+                    onChange={this.onChange}
+
+                  />
+                </div>
+                {/* disabled for Edit Only!! remove "disabled" for the Create operation */}
+                <div className="form-group">
+                  <textarea
+                    className="form-control form-control-lg"
+                    placeholder="Project Description"
+                    name="description"
+                    value={this.state.description}
+                    onChange={this.onChange}
+                  ></textarea>
+                </div>
+                <h6>Start Date</h6>
+                <div className="form-group">
+                  <input
+                    type="date"
+                    className="form-control form-control-lg"
+                    name="startDate"
+                    value={this.state.startDate}
+                    onChange={this.onChange}
+                  />
+                </div>
+                <h6>Estimated End Date</h6>
+                <div className="form-group">
+                  <input
+                    type="date"
+                    className="form-control form-control-lg"
+                    name="endDate"
+                    value={this.state.endDate}
+                    onChange={this.onChange}
+                  />
+                </div>
+
+                <input
+                  type="submit"
+                  className="btn btn-primary btn-block mt-4"
+                />
+              </form>
             </div>
-        );
-    };
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default AddProject;
