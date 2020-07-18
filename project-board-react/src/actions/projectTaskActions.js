@@ -4,8 +4,8 @@ import { GET_ERRORS, GET_PROJECT_TASKS, DELETE_PROJECT_TASK, GET_PROJECT_TASK } 
 //Endpoint urls
 const createTaskPath = "http://localhost:8080/api/board/create";
 const getTasksPath = "http://localhost:8080/api/board/all";
-const deleteTaskPath = `http://localhost:8080/api/board/delete`;
-const getTaskPath = `http://localhost:8080/api/board/get`;
+const deleteTaskPath = "http://localhost:8080/api/board/delete";
+const getTaskPath = "http://localhost:8080/api/board/get";
 
 /*
 * Http Post request to add new project task

@@ -15,6 +15,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/project")
+@CrossOrigin
 public class ProjectController {
 
     @Autowired
@@ -22,7 +23,7 @@ public class ProjectController {
     @Autowired
     ValidationErrorService errorService;
 
-    @PostMapping("/")
+    @PostMapping("/create")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
         ResponseEntity<?>errorMap = errorService.validateFields(result);
@@ -37,7 +38,7 @@ public class ProjectController {
         return projectService.findAllProjects();
     }
 
-    @GetMapping("/{projectId}")
+    @GetMapping("/get/{projectId}")
     public ResponseEntity<?> getProjectById(@PathVariable String projectId) {
 
         Project project = projectService.findProjectByIdentifier(projectId);
@@ -45,7 +46,7 @@ public class ProjectController {
         return new ResponseEntity<Project>(project, HttpStatus.OK);
     }
 
-    @DeleteMapping("/{projectId}")
+    @DeleteMapping("/delete/{projectId}")
     public ResponseEntity<?> deleteProject(@PathVariable String projectId) {
         projectService.deleteProjectByIdentifier(projectId);
 
