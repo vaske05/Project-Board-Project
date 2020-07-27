@@ -14,8 +14,20 @@ class ProjectTaskItem extends Component {
 
     drag(ev) {
         ev.dataTransfer.setData("id", ev.target.id);
-        const divs = document.getElementsByClassName("statusDiv");
-        addClass(divs, "customShadow");
+
+        // old
+        // const divs = document.getElementsByClassName("statusDiv");
+        // addClass(divs, "customShadow");
+
+        //new
+        const divToDo = document.getElementById("divToDo");
+        const divInProgress = document.getElementById("divInProgress");
+        const divDone = document.getElementById("divDone");
+
+        divToDo.classList.add("customShadowGrey");
+        divInProgress.classList.add("customShadowBlue");
+        divDone.classList.add("customShadowGreen");
+        //
     }
 
     drop(ev) {

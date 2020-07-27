@@ -38,9 +38,20 @@ class ProjectBoard extends Component {
 
     drop(ev) {
         const targetStatusId = ev.target.id;
+        
+        // old
+        // const divs = document.getElementsByClassName("statusDiv");
+        // removeClass(divs, "customShadow");
 
-        const divs = document.getElementsByClassName("statusDiv");
-        removeClass(divs, "customShadow");
+        //new
+        const divToDo = document.getElementById("divToDo");
+        const divInProgress = document.getElementById("divInProgress");
+        const divDone = document.getElementById("divDone");
+
+        divToDo.classList.remove("customShadowGrey");
+        divInProgress.classList.remove("customShadowBlue");
+        divDone.classList.remove("customShadowGreen");
+        //
 
         if(targetStatusId === "divToDo" || targetStatusId === "divDone" || targetStatusId === "divInProgress") {
             ev.preventDefault();
