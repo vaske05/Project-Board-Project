@@ -56,7 +56,7 @@ class UpdateProjectTask extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-8">
-                        <Link to="/projectBoard" className="btn btn-primary">
+                        <Link to="/projectBoard" className="btn btn-success">
                             <i className="fas fa-arrow-left"></i>
                             <i className=""> Back to Board</i>
                         </Link>
@@ -96,7 +96,7 @@ class UpdateProjectTask extends Component {
                                     <option value="DONE">DONE</option>
                                 </select>
                             </div>
-                            <input type="submit" className="btn btn-primary btn-block mt-4" />
+                            <input type="submit" className="btn btn-success btn-block mt-4" value="Update" />
                         </form>
                     </div>
                 </div>

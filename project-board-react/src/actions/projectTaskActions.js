@@ -14,7 +14,7 @@ export const addProjectTask = (project_task, history) => async dispatch => {
 
     try {
         await axios.post(createTaskPath, project_task);
-        history.push("/"); //Redirect to home page
+        history.push("/projectBoard"); //Redirect to project board page
         dispatch({
             type: GET_ERRORS,
             payload: {}

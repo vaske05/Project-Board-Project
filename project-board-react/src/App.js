@@ -7,7 +7,7 @@ import AddProjectTask from './components/ProjectTask/AddProjectTask';
 import UpdateProjectTask from './components/ProjectTask/UpdateProjectTask';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
-import  store  from "./store";
+import store  from "./store";
 import Header from './components/Layout/Header';
 import Dashboard from './components/Dashboard';
 import AddProject from './components/Project/AddProject';
@@ -23,7 +23,7 @@ function App() {
           <Route path="/addProject" component={AddProject}/>
           <Route path="/projectBoard" component={ProjectBoard} /> 
           <Route exact path="/addProjectTask" component={AddProjectTask} />
-          { /* <Route exact path="/update/:pt_id" component={UpdateProjectTask} /> */}
+          <Route exact path="/update/:pt_id" component={UpdateProjectTask} />
         </div>
       </Router>
     </Provider>
