@@ -16,9 +16,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
-@RequestMapping("/api/project")
 @CrossOrigin
-public class ProjectController {
+@RequestMapping("/api/project")
+public class ProjectController {  //TODO next 22
 
     @Autowired
     ProjectService projectService;

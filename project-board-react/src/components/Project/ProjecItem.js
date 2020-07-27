@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 
 class ProjecItem extends Component {
-  //next 13
+  //next 22
   render() {
     const { project } = this.props;
 
