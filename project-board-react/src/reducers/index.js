@@ -1,4 +1,4 @@
-import { combineReducers} from "redux";
+import { combineReducers } from "redux";
 import errorsReducer from "./errorsReducer";
 import projectTaskReducer from "./projectTaskReducer";
 import projectReducer from './projectReducer';

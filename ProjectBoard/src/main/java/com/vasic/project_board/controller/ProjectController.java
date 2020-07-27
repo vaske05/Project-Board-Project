@@ -12,6 +12,8 @@ import com.vasic.project_board.service.ProjectService;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.validation.Valid;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @RestController
 @RequestMapping("/api/project")
@@ -23,6 +25,9 @@ public class ProjectController {
     @Autowired
     ValidationErrorService errorService;
 
+    private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
+
+
     @PostMapping("/create")
     public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
 
@@ -30,11 +35,13 @@ public class ProjectController {
         if(errorMap != null) { return errorMap; }
 
         Project createdProject = projectService.saveOrUpdateProject(project);
+        LOGGER.log(Level.INFO, "Project - created: " + project.getProjectName());
+
         return new ResponseEntity<Project>(createdProject, HttpStatus.CREATED);
     }
 
     @GetMapping("/all")
-    public Iterable<Project> getAllProjects(@RequestBody Project project) {
+    public Iterable<Project> getAllProjects(/*@RequestBody Project project*/) {
         return projectService.findAllProjects();
     }
 
@@ -50,6 +57,7 @@ public class ProjectController {
     public ResponseEntity<?> deleteProject(@PathVariable String projectId) {
         projectService.deleteProjectByIdentifier(projectId);
 
+        LOGGER.log(Level.INFO, "Project - deleted: id: " + projectId);
         return new ResponseEntity<String>("Project with ID: '" + projectId + "' was deleted.", HttpStatus.OK);
     }
 }

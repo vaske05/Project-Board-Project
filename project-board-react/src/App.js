@@ -11,6 +11,7 @@ import store  from "./store";
 import Header from './components/Layout/Header';
 import Dashboard from './components/Dashboard';
 import AddProject from './components/Project/AddProject';
+import UpdateProject from './components/Project/UpdateProject';
 
 function App() {
   return (
@@ -19,11 +20,14 @@ function App() {
       <Router>
         <div className="App">
           <Header/>
-          <Route path="/dashboard" component={Dashboard}></Route>
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/addProject" component={AddProject}/>
+          <Route path="/updateProject/:id" component={UpdateProject}/>
+
+
           <Route path="/projectBoard" component={ProjectBoard} /> 
           <Route exact path="/addProjectTask" component={AddProjectTask} />
-          <Route exact path="/update/:pt_id" component={UpdateProjectTask} />
+          <Route exact path="/updateProjectTask/:pt_id" component={UpdateProjectTask} />
         </div>
       </Router>
     </Provider>

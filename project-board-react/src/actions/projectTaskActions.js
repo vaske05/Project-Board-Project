@@ -54,7 +54,7 @@ export const deleteProjectTask = pt_id => async dispatch => {
 };
 
 /*
-*
+* Http Get request to grab appropriate task.
 */
 export const getProjectTask = (pt_id, history) => async dispatch => {
     try {
