@@ -11,6 +11,7 @@ const getProjectPath = `http://localhost:8080/api/project/get`;
 * Http Post request to create new Project 
 */
 export const createProject = (project, history) => async dispatch => {
+    
     try {
         await axios.post(createProjectPath, project);
         history.push("/dashboard");
@@ -48,9 +49,15 @@ export const deleteProject = project_id => async dispatch => {
 };
 
 export const getProject = (project_id, history) => async dispatch => {
-    const res = await axios.get(getProjectPath + `/${project_id}`);
-    dispatch({
-        type: GET_PROJECT,
-        payload: res.data
-    });
+
+    try {
+        const res = await axios.get(getProjectPath + `/${project_id}`);
+        dispatch({
+            type: GET_PROJECT,
+            payload: res.data
+        });
+        
+    } catch (error) {
+        history.push("/dashboard");
+    }
 }

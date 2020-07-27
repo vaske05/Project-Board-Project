@@ -64,7 +64,6 @@ export const getProjectTask = (pt_id, history) => async dispatch => {
             payload: res.data
         });
     } catch (error) {
-            console.log(error);
             history.push("/");
     }
 }

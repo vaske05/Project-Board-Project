@@ -9,6 +9,7 @@ class UpdateProject extends Component {
     super();
 
     this.state = {
+      id: "",
       projectName: "",
       projectIdentifier: "",
       description: "",
@@ -27,12 +28,20 @@ class UpdateProject extends Component {
 
   //life cycle hooks
   componentWillReceiveProps(nextProps) {
-    const {projectName, projectIdentifier, description, startDate, endDate} = nextProps.project;
-    this.setState({projectName, projectIdentifier, description, startDate, endDate});
+    const {
+      id, 
+      projectName, 
+      projectIdentifier, 
+      description, 
+      startDate, 
+      endDate
+    } = nextProps.project;
+
+    this.setState({id, projectName, projectIdentifier, description, startDate, endDate});
+
     if (nextProps.errors) {
       this.setState({ errors: nextProps.errors });
     }
-
   }
 
   onChange(e) {
@@ -42,12 +51,13 @@ class UpdateProject extends Component {
   onSubmit(e) {
     e.preventDefault(); // turn off reload
     const newProject = {
+      id: this.state.id,
       projectName: this.state.projectName,
       projectIdentifier: this.state.projectIdentifier,
       description: this.state.description,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-    };
+    }; 
     this.props.createProject(newProject, this.props.history);
   }
 
@@ -152,7 +162,7 @@ UpdateProject.propTypes = {
 
 const mapStateToProps = (state) => ({
   errors: state.errors,
-  project: state.project.project,
+  project: state.project.project
 });
 
 export default connect(mapStateToProps, { createProject, getProject })(
