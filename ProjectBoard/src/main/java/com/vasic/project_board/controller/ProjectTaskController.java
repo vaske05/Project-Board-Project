@@ -24,23 +24,23 @@ public class ProjectTaskController {
     ProjectTaskService projectTaskService;
 
     private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
-
-    @PostMapping("/create")
-    public ResponseEntity<?> addProjectTaskToBoard(@Valid @RequestBody ProjectTask projectTask, BindingResult result) {
-        if(result.hasErrors()) {
-            Map<String, String> errorMap = new HashMap<>();
-
-            for(FieldError error: result.getFieldErrors()) {
-                errorMap.put(error.getField(), error.getDefaultMessage());
-            }
-
-            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
-        }
-        ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(projectTask);
-        LOGGER.log(Level.INFO, "Project task - created: summary = " + newProjectTask.getSummary());
-
-        return new ResponseEntity<ProjectTask>(newProjectTask, HttpStatus.CREATED);
-    }
+// VEROVATNO SE BRISE SVE
+//    @PostMapping("/create")
+//    public ResponseEntity<?> addProjectTaskToBoard(@Valid @RequestBody ProjectTask projectTask, BindingResult result) {
+//        if(result.hasErrors()) {
+//            Map<String, String> errorMap = new HashMap<>();
+//
+//            for(FieldError error: result.getFieldErrors()) {
+//                errorMap.put(error.getField(), error.getDefaultMessage());
+//            }
+//
+//            return new ResponseEntity<Map<String, String>>(errorMap, HttpStatus.BAD_REQUEST);
+//        }
+//        // ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(projectTask);
+//        LOGGER.log(Level.INFO, "Project task - created: summary = " + newProjectTask.getSummary());
+//
+//        return new ResponseEntity<ProjectTask>(newProjectTask, HttpStatus.CREATED);
+//    }
 
     @GetMapping("/all")
     public Iterable<ProjectTask> findAllProjectTasks() {

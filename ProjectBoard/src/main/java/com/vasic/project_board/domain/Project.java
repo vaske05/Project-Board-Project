@@ -1,6 +1,7 @@
 package com.vasic.project_board.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 
@@ -38,6 +39,7 @@ public class Project {
 
 	// OneToOne with backlog
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "project")
+	@JsonIgnore // ignore backlog object in project json object
 	private Backlog backlog;
 	
 	public Project() {
