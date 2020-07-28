@@ -5,17 +5,25 @@ import CreateProjectButton from "./Project/CreateProjectButton";
 import PropTypes from 'prop-types';
 import {gelAllProjects} from '../actions/projectActions';
 import { connect } from "react-redux";
+import Loader from "./Layout/Loader";
 
 
 class Dashboard extends Component {
 
+  
   constructor() {
     super();
+    this.state = {
+      isLoaded: false
+    }
   }
 
-  componentDidMount() {
-    this.props.gelAllProjects();
+  async componentDidMount() {
+    await this.props.gelAllProjects();
+    this.setState({isLoaded:true});
+
   }
+
 
   render() {
 
@@ -33,13 +41,15 @@ class Dashboard extends Component {
               <hr />
 
               {
+                
                 /* Project Item Component */
-
-                projects.length < 1 ? <div className="alert alert-info text-center" role="alert">No projects found.</div> :
-
-                projects.map(project=> (
-                  <ProjecItem key={project.id} project={project}></ProjecItem>
-                ))
+                
+                //If data is loaded show "No projects found" or found projects. Otherwise show loader animation
+                this.state.isLoaded ? ( projects.length < 1 ? <div className="alert alert-info text-center" role="alert">No projects found.</div> :
+                  projects.map(project=> (
+                    <ProjecItem key={project.id} project={project}></ProjecItem>
+                  ))) : (<Loader></Loader>)
+                
               
                 /* End of Project Item Component */
               }
