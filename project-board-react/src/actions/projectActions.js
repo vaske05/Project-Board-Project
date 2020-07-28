@@ -15,6 +15,10 @@ export const createProject = (project, history) => async dispatch => {
     try {
         await axios.post(createProjectPath, project);
         history.push("/dashboard");
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
         
     } catch (error) {
         dispatch({
@@ -37,17 +41,22 @@ export const gelAllProjects = () => async dispatch => {
 };
 
 /*
-* Http Get request to delete Project
+* Http Delete request to delete Project
 */
-export const deleteProject = project_id => async dispatch => {
-    const res = await axios.get(deleteProjectPath);
-    dispatch({
-        type: GET_PROJECTS,
-        payload: res.data
-    });
+export const deleteProject = project_identifier => async dispatch => {
+    if( (window.confirm(`Are you sure to delete project ${project_identifier}`)) ) {
+        const res = await axios.delete(deleteProjectPath + `/${project_identifier}`);
+        dispatch({
+            type: DELETE_PROJECT,
+            payload: project_identifier
+        });
+    }
    
 };
 
+/*
+* Http Get request to grab Project
+*/
 export const getProject = (project_id, history) => async dispatch => {
 
     try {
