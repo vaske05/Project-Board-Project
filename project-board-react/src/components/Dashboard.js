@@ -16,12 +16,17 @@ class Dashboard extends Component {
     this.state = {
       isLoaded: false
     }
+
+    this.handleLoading = this.handleLoading.bind(this);
   }
 
-  async componentDidMount() {
+   componentDidMount() {
+     setTimeout(this.handleLoading, 1000);
+  }
+  
+  async handleLoading() {
     await this.props.gelAllProjects();
     this.setState({isLoaded:true});
-
   }
 
 
