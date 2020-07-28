@@ -2,10 +2,10 @@ import axios from "axios";
 import { GET_ERRORS, GET_PROJECT, DELETE_PROJECT, GET_PROJECTS } from "./types";
 
 //Endpoint urls
-const createProjectPath = "http://localhost:8080/api/project/create";
-const getProjectsPath = "http://localhost:8080/api/project/all";
-const deleteProjectPath = "http://localhost:8080/api/project/delete";
-const getProjectPath = `http://localhost:8080/api/project/get`;
+const createProjectPath = "/api/project/create";
+const getProjectsPath = "/api/project/all";
+const deleteProjectPath = "/api/project/delete";
+const getProjectPath = "/api/project/get";
 
 /*
 * Http Post request to create new Project 
