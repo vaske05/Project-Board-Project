@@ -28,14 +28,14 @@ public class BacklogController {
 
     private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
 
-    @PostMapping("/create/{project_identifier}")
+    @PostMapping("/create/{backlog_id}")
     public ResponseEntity<?> addProjectTaskToBacklog(@Valid @RequestBody ProjectTask projectTask,
-                                                     BindingResult result, @PathVariable String project_identifier) {
+                                                     BindingResult result, @PathVariable String backlog_id) {
 
         ResponseEntity<?> errorMap = errorService.validateFields(result);
         if(errorMap != null) { return errorMap; }
 
-        ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(project_identifier, projectTask);
+        ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(backlog_id, projectTask);
 
         LOGGER.log(Level.INFO, "Project task - created: summary = " + newProjectTask.getSummary());
 

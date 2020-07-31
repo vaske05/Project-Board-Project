@@ -25,13 +25,13 @@ public class ProjectTaskService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public ProjectTask saveOrUpdateProjectTask(String projectIdentifier, ProjectTask projectTask) {
+    public ProjectTask saveOrUpdateProjectTask(String backlog_id, ProjectTask projectTask) {
 
         try {
             //Exceptions: project not found
 
             //PTs to be added to a specific project
-            Backlog backlog = backlogRepository.findByProjectIdentifier(projectIdentifier);
+            Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
             //Set the BL to PT
             projectTask.setBacklog(backlog);
 
@@ -42,16 +42,16 @@ public class ProjectTaskService {
             backlog.setPTSequence(backlogSequence);
 
             // Add sequence to Project Task
-            projectTask.setProjectSequence(projectIdentifier + "-" + backlogSequence);
-            projectTask.setProjectIdentifier(projectIdentifier);
+            projectTask.setProjectSequence(backlog_id + "-" + backlogSequence);
+            projectTask.setProjectIdentifier(backlog_id);
 
             // INITIAL priority when priority is NULL
-            if(projectTask.getPriority() == null || projectTask.getPriority() == 0) {
+            if(projectTask.getPriority() == 0 || projectTask.getPriority() == null) {
                 projectTask.setPriority(3);
             }
 
             // INITIAL status when status is NULL
-            if(projectTask.getStatus() == null || projectTask.getStatus() == "") {
+            if( projectTask.getStatus() == "" || projectTask.getStatus() == null) {
                 projectTask.setStatus("TO_DO");
             }
 

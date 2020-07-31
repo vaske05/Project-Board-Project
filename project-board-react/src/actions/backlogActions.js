@@ -2,19 +2,19 @@ import axios from "axios";
 import { GET_ERRORS, GET_BACKLOG, DELETE_PROJECT_TASK, GET_PROJECT_TASK } from "./types";
 
 //Endpoint urls
-const createTaskPath = "http://localhost:8080/api/board/create";
-const getTasksPath = "http://localhost:8080/api/board/all";
-const deleteTaskPath = "http://localhost:8080/api/board/delete";
-const getTaskPath = "http://localhost:8080/api/board/get";
+const createTaskPath = "http://localhost:8080/api/backlog/create";
+const getTasksPath = "http://localhost:8080/api/backlog/all";
+const deleteTaskPath = "http://localhost:8080/api/backlog/delete";
+const getTaskPath = "http://localhost:8080/api/backlog/get";
 
 /*
 * Http Post request to add new project task
 */
-export const addProjectTask = (project_task, history) => async dispatch => {
+export const addProjectTask = (backlog_id, project_task, history) => async dispatch => {
 
     try {
-        await axios.post(createTaskPath, project_task);
-        history.push("/projectBoard"); //Redirect to project board page
+        await axios.post(createTaskPath + `/${backlog_id}`, project_task);
+        history.push(`/projectBoard/${backlog_id}`); //Redirect to project board page
         dispatch({
             type: GET_ERRORS,
             payload: {}

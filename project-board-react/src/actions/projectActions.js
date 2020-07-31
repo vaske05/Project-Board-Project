@@ -45,7 +45,7 @@ export const gelAllProjects = () => async dispatch => {
 */
 export const deleteProject = project_identifier => async dispatch => {
     if( (window.confirm(`Are you sure to delete project ${project_identifier}`)) ) {
-        const res = await axios.delete(deleteProjectPath + `/${project_identifier}`);
+        await axios.delete(deleteProjectPath + `/${project_identifier}`);
         dispatch({
             type: DELETE_PROJECT,
             payload: project_identifier

@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { deleteProjectTask } from "../../actions/projectTaskActions";
-import { addClass } from '../../helpers';
+import { deleteProjectTask } from "../../../actions/backlogActions";
+import { addClass } from '../../../helpers';
 
 
 class ProjectTaskItem extends Component {
@@ -64,4 +64,5 @@ ProjectTaskItem.propTypes = {
     deleteProjectTask: PropTypes.func.isRequired
 }
 
+//Connect React component to a Redux store.
 export default connect(null, { deleteProjectTask }) (ProjectTaskItem);

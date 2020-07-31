@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import ProjectTaskItem from './ProjectTask/ProjectTaskItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getBacklog } from '../../actions/projectTaskActions';
 import { status } from '../../constants';
-import { addProjectTask } from '../../actions/projectTaskActions';
-import { getProjectTask } from '../../actions/projectTaskActions';
+import { getProjectTask, addProjectTask, getBacklog } from '../../actions/backlogActions';
 import { mapTaskStatus, removeClass } from '../../helpers';
 
 
@@ -66,7 +64,7 @@ class ProjectBoard extends Component {
 
     render() {
 
-
+        const { id } = this.props.match.params;
         const { project_tasks } = this.props.project_tasks;
 
         let BoardContent;
@@ -154,7 +152,7 @@ class ProjectBoard extends Component {
 
         return (
             <div className="container">
-                <Link to="/addProjectTask" className="btn btn-success mb-3">
+                <Link to={`/addProjectTask/${id}`} className="btn btn-success mb-3">
                     <i className="">Add Project Task </i>
                     <i className="fas fa-plus-circle"></i>
                 </Link>
@@ -181,4 +179,5 @@ const mapStateToProps = state => ({
     project_tasks: state.project_task
 })
 
+//Connect React component to a Redux store.
 export default connect(mapStateToProps, { getBacklog, getProjectTask, addProjectTask })(ProjectBoard);

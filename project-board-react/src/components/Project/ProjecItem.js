@@ -28,7 +28,7 @@ class ProjecItem extends Component {
             </div>
             <div className="col-md-4 d-none d-lg-block">
               <ul className="list-group">
-                <Link to="/projectBoard">
+                <Link to={`/projectBoard/${project.projectIdentifier}`}>
                   <li className="list-group-item board">
                     <i className="fa fa-flag-checkered pr-1"> Project Board </i>
                   </li>
@@ -38,11 +38,9 @@ class ProjecItem extends Component {
                     <i className="fa fa-edit pr-1"> Update Project Info</i>
                   </li>
                 </Link>
-                <Link onClick={this.onDeleteClick.bind(this, project.projectIdentifier)}>
-                  <li className="list-group-item delete">
-                    <i className="fa fa-minus-circle pr-1"> Delete Project</i>
-                  </li>
-                </Link>
+                <li onClick={this.onDeleteClick.bind(this, project.projectIdentifier)} className="list-group-item delete">
+                  <i className="fa fa-minus-circle pr-1"> Delete Project</i>
+                </li>
               </ul>
             </div>
           </div>
@@ -56,4 +54,5 @@ ProjecItem.propTypes = {
   deleteProject: PropTypes.func.isRequired
 }
 
+//Connect React component to a Redux store.
 export default connect(null, {deleteProject})(ProjecItem);

@@ -165,6 +165,7 @@ const mapStateToProps = (state) => ({
   project: state.project.project
 });
 
+//Connect React component to a Redux store.
 export default connect(mapStateToProps, { createProject, getProject })(
   UpdateProject
 );

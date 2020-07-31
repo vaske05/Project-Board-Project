@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import classnames from "classnames";
-import { getProjectTask, addProjectTask } from "../../actions/projectTaskActions"
+import { getProjectTask, addProjectTask } from "../../../actions/backlogActions";
 
 class UpdateProjectTask extends Component {
 
@@ -119,4 +119,5 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
+//Connect React component to a Redux store.
 export default connect(mapStateToProps, {getProjectTask, addProjectTask}) (UpdateProjectTask);
