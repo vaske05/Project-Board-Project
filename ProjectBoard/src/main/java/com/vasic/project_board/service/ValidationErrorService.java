@@ -11,11 +11,11 @@ import java.util.Map;
 
 @Service
 public class ValidationErrorService {
-    public ResponseEntity<?> validateFields(BindingResult result) {
-        if(result.hasErrors()) {
+    public ResponseEntity<?> validateFields(BindingResult bindingResult) {
+        if(bindingResult.hasErrors()) {
             Map<String, String> errorMap = new HashMap<>(); // Hash map data structure(key-value)
 
-            for(FieldError error: result.getFieldErrors()) {
+            for(FieldError error: bindingResult.getFieldErrors()) {
                 errorMap.put(error.getField(), error.getDefaultMessage());
             }
             

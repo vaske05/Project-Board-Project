@@ -55,6 +55,7 @@ public class ProjectController {  //TODO next 22
 
     @DeleteMapping("/delete/{projectId}")
     public ResponseEntity<?> deleteProject(@PathVariable String projectId) {
+
         projectService.deleteProjectByIdentifier(projectId);
 
         LOGGER.log(Level.INFO, "Project - deleted: id: " + projectId);
