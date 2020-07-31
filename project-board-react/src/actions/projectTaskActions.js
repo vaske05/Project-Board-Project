@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECT_TASKS, DELETE_PROJECT_TASK, GET_PROJECT_TASK } from "./types";
+import { GET_ERRORS, GET_BACKLOG, DELETE_PROJECT_TASK, GET_PROJECT_TASK } from "./types";
 
 //Endpoint urls
 const createTaskPath = "http://localhost:8080/api/board/create";
@@ -34,7 +34,7 @@ export const addProjectTask = (project_task, history) => async dispatch => {
 export const getBacklog = () => async dispatch => {
     const res = await axios.get(getTasksPath);
     dispatch({
-        type: GET_PROJECT_TASKS,
+        type: GET_BACKLOG,
         payload: res.data
     });
 };
