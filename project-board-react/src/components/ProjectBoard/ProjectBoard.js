@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import ProjectTaskItem from './ProjectTask/ProjectTaskItem';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getBacklog } from '../actions/projectTaskActions';
-import { status } from '../constants';
-import { addProjectTask } from '../actions/projectTaskActions';
-import { getProjectTask } from '../actions/projectTaskActions';
-import { mapTaskStatus, removeClass } from '../helpers';
+import { getBacklog } from '../../actions/projectTaskActions';
+import { status } from '../../constants';
+import { addProjectTask } from '../../actions/projectTaskActions';
+import { getProjectTask } from '../../actions/projectTaskActions';
+import { mapTaskStatus, removeClass } from '../../helpers';
 
 
 class ProjectBoard extends Component {

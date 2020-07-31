@@ -2,9 +2,9 @@ import React from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap import
 import Navbar from './components/Navbar';
-import ProjectBoard from './components/ProjectBoard';
-import AddProjectTask from './components/ProjectTask/AddProjectTask';
-import UpdateProjectTask from './components/ProjectTask/UpdateProjectTask';
+import ProjectBoard from './components/ProjectBoard/ProjectBoard';
+import AddProjectTask from './components/ProjectBoard/ProjectTask/AddProjectTask';
+import UpdateProjectTask from './components/ProjectBoard/ProjectTask/UpdateProjectTask';
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Provider } from "react-redux";
 import store  from "./store";
