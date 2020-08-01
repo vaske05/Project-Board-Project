@@ -43,7 +43,6 @@ class AddProjectTask extends Component {
       dueDate: this.state.dueDate,
       
     };
-    console.log(newProjectTask);
     this.props.addProjectTask(this.state.projectIdentifier, newProjectTask, this.props.history);
   }
 

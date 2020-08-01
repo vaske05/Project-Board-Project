@@ -12,8 +12,8 @@ class ProjectTaskItem extends Component {
         super();
     }
 
-    onDeleteClick(pt_id) {
-        this.props.deleteProjectTask(pt_id);
+    onDeleteClick(backlog_id, pt_id) {
+        this.props.deleteProjectTask(backlog_id, pt_id);
     }
 
     drag = (ev) => {
@@ -74,11 +74,11 @@ class ProjectTaskItem extends Component {
                 <p className="card-text text-truncate ">
                     {project_task.acceptanceCriteria}
                 </p>
-                <Link to={`updateProjectTask/${project_task.id}`} className="btn btn-primary">
+                <Link to={`/updateProjectTask/${project_task.projectIdentifier}/${project_task.projectSequence}`} className="btn btn-primary">
                     View / Update
                 </Link>
 
-                <button className="btn btn-danger ml-4" onClick={this.onDeleteClick.bind(this, project_task.id)}>
+                <button className="btn btn-danger ml-4" onClick={this.onDeleteClick.bind(this, project_task.projectIdentifier, project_task.projectSequence)}>
                     Delete
                 </button>
             </div>

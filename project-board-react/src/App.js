@@ -21,13 +21,14 @@ function App() {
         <div className="App">
           <Header/>
           <Route exact path="/dashboard" component={Dashboard} />
+
           <Route exact path="/addProject" component={AddProject}/>
           <Route exact path="/updateProject/:id" component={UpdateProject}/>
           
-          <Route path="/projectBoard/:id" component={ProjectBoard} /> 
-          
+          <Route exact path="/projectBoard/:id" component={ProjectBoard} /> 
+    
           <Route exact path="/addProjectTask/:id" component={AddProjectTask} />
-          <Route exact path="/updateProjectTask/:pt_id" component={UpdateProjectTask} />
+          <Route exact path="/updateProjectTask/:backlog_id/:pt_id" component={UpdateProjectTask} />
         </div>
       </Router>
     </Provider>

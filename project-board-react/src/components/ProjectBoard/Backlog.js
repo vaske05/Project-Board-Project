@@ -23,7 +23,6 @@ class Backlog extends Component {
     }
 
     async updateProjectStatus(backlog_id, pt_id, targetStatusId) {
-        console.log(this.props);
         await this.props.getProjectTask(backlog_id, pt_id, this.props.history);
         const projectTask = this.props.backlog.project_task;
 
