@@ -71,11 +71,7 @@ class Backlog extends Component {
         let doneItems = [];
 
 
-        if (project_tasks.length < 1) {
-            return (
-                <div className="alert alert-info text-center" role="alert">No project tasks on this board.</div>
-            )
-        } else {
+        
             const tasks = project_tasks.map(project_task => (
                 <ProjectTaskItem key={project_task.id} project_task={project_task}></ProjectTaskItem>
             ));
@@ -139,7 +135,7 @@ class Backlog extends Component {
                     </div>
                 </React.Fragment>
             )
-        }
+        
     }
 }
 

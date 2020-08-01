@@ -93,7 +93,7 @@ ProjectTaskItem.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    project_tasks: state.project_task
+    backlog: state.backlog,
 })
 
 //Connect React component to a Redux store.

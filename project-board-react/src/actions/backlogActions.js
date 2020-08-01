@@ -32,11 +32,19 @@ export const addProjectTask = (backlog_id, project_task, history) => async dispa
 * Http Get request to get all tasks
 */
 export const getBacklog = (backlog_id) => async dispatch => {
-    const res = await axios.get(getTasksPath + `/${backlog_id}`);
-    dispatch({
-        type: GET_BACKLOG,
-        payload: res.data
-    });
+
+    try {
+        const res = await axios.get(getTasksPath + `/${backlog_id}`);
+        dispatch({
+            type: GET_BACKLOG,
+            payload: res.data
+        }); 
+    } catch (error) {
+        dispatch({
+            type: GET_ERRORS,
+            payload: error.response.data
+        });   
+    }
 };
 
 /*

@@ -10,10 +10,19 @@ class ProjectBoard extends Component {
 
     constructor() {
         super();
+        this.state = {
+            errors: {}
+        };
     }
 
     componentDidMount() {
         this.props.getBacklog(this.props.match.params.id);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.errors) {
+            this.setState({ errors: nextProps.errors });
+        }
     }
 
 
@@ -21,6 +30,32 @@ class ProjectBoard extends Component {
 
         const { id } = this.props.match.params;
         const { project_tasks } = this.props.backlog;
+        const {errors} = this.state;
+
+        let BoardContent;
+        const BoardAlgorithm = (errors, project_tasks) => {
+
+            if(project_tasks.length < 1) {
+
+                if(errors.projectNotFound) {
+                    return (
+                        <div className="alert alert-danger text-center" role="alert"> { errors.projectNotFound } </div>  
+                    );
+                } 
+                else {
+                    return (
+                        <div className="alert alert-info text-center" role="alert">No project tasks on this board.</div>
+                    )
+                }
+            } 
+            else {
+                return (
+                    <Backlog history={this.props.history} project_tasks={project_tasks}></Backlog>
+                )
+            }
+        }
+
+        BoardContent = BoardAlgorithm(errors, project_tasks);
 
         return (
             <div className="container">
@@ -33,7 +68,7 @@ class ProjectBoard extends Component {
                 {
                     // Backlog STARTS HERE
                 }
-                <Backlog history={this.props.history} project_tasks={project_tasks}></Backlog>
+                {BoardContent}
             </div>
         );
     }
@@ -41,11 +76,13 @@ class ProjectBoard extends Component {
 
 ProjectBoard.propTypes = {
     getBacklog: PropTypes.func.isRequired,
-    backlog: PropTypes.object.isRequired
+    backlog: PropTypes.object.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-    backlog: state.backlog
+    backlog: state.backlog,
+    errors: state.errors
 })
 
 //Connect React component to a Redux store.
