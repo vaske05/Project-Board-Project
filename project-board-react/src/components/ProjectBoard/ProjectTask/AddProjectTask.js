@@ -8,7 +8,8 @@ import { addProjectTask } from "../../../actions/backlogActions";
 class AddProjectTask extends Component {
   constructor(props) {
     super(props);
-    const { id } = this.props.matches.params;
+
+    const { id } = this.props.match.params;
 
     this.state = {
       summary: "",
@@ -19,8 +20,6 @@ class AddProjectTask extends Component {
       projectIdentifier: id,
       errors: {}
     };
-    this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,20 +28,23 @@ class AddProjectTask extends Component {
     }
   }
 
-  onChange(e) {
+  onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
   //Form submit
-  onSubmit(e) {
+  onSubmit = (e) => {
     e.preventDefault();
     const newProjectTask = {
       summary: this.state.summary,
       acceptanceCriteria: this.state.acceptanceCriteria,
       status: this.state.status,
+      priority: this.state.priority,
+      dueDate: this.state.dueDate,
+      
     };
-    // console.log(newProjectTask);
-    this.props.addProjectTask(newProjectTask, this.props.history);
+    console.log(newProjectTask);
+    this.props.addProjectTask(this.state.projectIdentifier, newProjectTask, this.props.history);
   }
 
   render() {
@@ -94,10 +96,11 @@ class AddProjectTask extends Component {
                     className="form-control form-control-lg"
                     name="dueDate"
                     value={this.state.dueDate}
+                    onChange={this.onChange}
                   />
                 </div>
                 <div className="form-group">
-                  <select className="form-control form-control-lg" name="priority" value={this.state.priority}>
+                  <select className="form-control form-control-lg" name="priority" value={this.state.priority} onChange={this.onChange}>
                     <option value={0}>Select Priority</option>
                     <option value={1}>High</option>
                     <option value={2}>Medium</option>

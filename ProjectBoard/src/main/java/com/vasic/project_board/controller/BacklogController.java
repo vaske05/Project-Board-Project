@@ -43,10 +43,10 @@ public class BacklogController {
 
     }
 
-    @GetMapping("/all/{project_identifier}") // project_identifier == backlog_identifier
-    public Iterable<ProjectTask> getProjectBacklog(@PathVariable String project_identifier) {
+    @GetMapping("/all/{backlog_id}") // project_identifier == backlog_identifier
+    public Iterable<ProjectTask> getProjectBacklog(@PathVariable String backlog_id) {
 
-        return projectTaskService.findBacklogByIdentifier(project_identifier);
+        return projectTaskService.findBacklogByIdentifier(backlog_id);
     }
 
     @GetMapping("/get/{project_identifier}/{pt_id}") // project_identifier == backlog_identifier

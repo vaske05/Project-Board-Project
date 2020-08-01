@@ -76,13 +76,13 @@ public class ProjectTaskService {
         projectTaskRepository.delete(projectTask);
     }
 
-    public Iterable<ProjectTask> findBacklogByIdentifier(String projectIdentifier) {
-        Project project = projectRepository.findByProjectIdentifier(projectIdentifier);
+    public Iterable<ProjectTask> findBacklogByIdentifier(String backlogId) {
+        Project project = projectRepository.findByProjectIdentifier(backlogId); // projectIdentifier = backlogId
         if(project == null) {
-            throw new ProjectNotFoundException("Project wit ID: '" + projectIdentifier + "' does not exist");
+            throw new ProjectNotFoundException("Project wit ID: '" + backlogId + "' does not exist");
         }
 
-        return projectTaskRepository.findByProjectIdentifierOrderByPriority(projectIdentifier);
+        return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlogId);
     }
 
     public ProjectTask findProjectTaskByProjectSequence(String projectIdentifier, String pt_id) {

@@ -39,9 +39,10 @@ class ProjectTaskItem extends Component {
         return (
         <div className="card mb-1 bg-light" draggable="true" id={`${project_task.id}`} onDragStart={this.drag} onDrop={this.drop}>
             <div className="card-header text-primary cardHead">
-                 {project_task.summary}
+                ID: {project_task.projectSequence} -- Priority: {project_task.priority}
             </div>
             <div className="card-body bg-light">
+                <h5> {project_task.summary} </h5>
                 
                 <p className="card-text text-truncate ">
                     {project_task.acceptanceCriteria}
