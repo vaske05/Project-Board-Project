@@ -43,10 +43,30 @@ class ProjectTaskItem extends Component {
 
     render() {
         const { project_task } = this.props;
+        let priorityClass;
+        let priorityString;
+
+        if(project_task.priority === 1) {
+            priorityClass = "bg-danger text-light";
+            priorityString = "HIGH";
+        }
+
+        if(project_task.priority === 2) {
+            priorityClass = "bg-warning text-light";
+            priorityString = "MEDIUM";
+        }
+
+        if(project_task.priority === 3) {
+            priorityClass = "bg-info text-light";
+            priorityString = "LOW";
+        }
+
+
+
         return (
         <div className="card mb-1 bg-light" draggable="true" id={project_task.projectSequence} onDragStart={this.drag} onDrop={this.drop}>
-            <div className="card-header text-primary cardHead">
-                ID: {project_task.projectSequence} -- Priority: {project_task.priority}
+            <div className={`card-header text-primary cardHead ${priorityClass}`}>
+                ID: {project_task.projectSequence} -- Priority: {priorityString}
             </div>
             <div className="card-body bg-light">
                 <h5> {project_task.summary} </h5>
