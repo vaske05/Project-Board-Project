@@ -56,9 +56,9 @@ export const deleteProjectTask = pt_id => async dispatch => {
 /*
 * Http Get request to grab appropriate task.
 */
-export const getProjectTask = (pt_id, history) => async dispatch => {
+export const getProjectTask = (backlog_id, pt_id, history) => async dispatch => {
     try {
-        const res = await axios.get(getTaskPath + `/${pt_id}`);
+        const res = await axios.get(getTaskPath+ `/${backlog_id}` + `/${pt_id}`);
         dispatch({
             type: GET_PROJECT_TASK,
             payload: res.data

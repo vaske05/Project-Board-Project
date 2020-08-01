@@ -8,12 +8,19 @@ import { addClass } from '../../../helpers';
 
 class ProjectTaskItem extends Component {
 
+    constructor() {
+        super();
+    }
+
     onDeleteClick(pt_id) {
         this.props.deleteProjectTask(pt_id);
     }
 
-    drag(ev) {
-        ev.dataTransfer.setData("id", ev.target.id);
+    drag = (ev) => {
+        const { project_task } = this.props;
+        ev.dataTransfer.setData("pt_id", project_task.projectSequence);
+        ev.dataTransfer.setData("backlog_id", project_task.projectIdentifier);
+
 
         // old
         // const divs = document.getElementsByClassName("statusDiv");
@@ -37,7 +44,7 @@ class ProjectTaskItem extends Component {
     render() {
         const { project_task } = this.props;
         return (
-        <div className="card mb-1 bg-light" draggable="true" id={`${project_task.id}`} onDragStart={this.drag} onDrop={this.drop}>
+        <div className="card mb-1 bg-light" draggable="true" id={project_task.projectSequence} onDragStart={this.drag} onDrop={this.drop}>
             <div className="card-header text-primary cardHead">
                 ID: {project_task.projectSequence} -- Priority: {project_task.priority}
             </div>
@@ -65,5 +72,9 @@ ProjectTaskItem.propTypes = {
     deleteProjectTask: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => ({
+    project_tasks: state.project_task
+})
+
 //Connect React component to a Redux store.
-export default connect(null, { deleteProjectTask }) (ProjectTaskItem);
+export default connect(mapStateToProps, { deleteProjectTask }) (ProjectTaskItem);
