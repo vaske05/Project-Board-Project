@@ -3,17 +3,13 @@ package com.vasic.project_board.service;
 import com.vasic.project_board.domain.Backlog;
 import com.vasic.project_board.domain.Project;
 import com.vasic.project_board.domain.ProjectTask;
-import com.vasic.project_board.exceptions.ProjectIdException;
 import com.vasic.project_board.exceptions.ProjectNotFoundException;
 import com.vasic.project_board.repository.BacklogRepository;
 import com.vasic.project_board.repository.ProjectRepository;
 import com.vasic.project_board.repository.ProjectTaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.validation.constraints.Null;
-import java.util.List;
 
 @Service
 public class ProjectTaskService {

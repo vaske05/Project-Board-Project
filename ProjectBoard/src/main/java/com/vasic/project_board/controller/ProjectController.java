@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import com.vasic.project_board.domain.Project;
 import com.vasic.project_board.service.ProjectService;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.validation.Valid;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,14 +17,14 @@ import java.util.logging.Logger;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/project")
-public class ProjectController {  //TODO next 22
+public class ProjectController {
 
     @Autowired
     ProjectService projectService;
     @Autowired
     ValidationErrorService errorService;
 
-    private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ProjectController.class.getName());
 
 
     @PostMapping("/create")

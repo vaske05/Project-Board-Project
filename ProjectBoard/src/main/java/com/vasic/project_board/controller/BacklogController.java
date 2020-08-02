@@ -1,6 +1,5 @@
 package com.vasic.project_board.controller;
 
-import com.vasic.project_board.domain.Project;
 import com.vasic.project_board.domain.ProjectTask;
 import com.vasic.project_board.service.ProjectTaskService;
 import com.vasic.project_board.service.ValidationErrorService;
@@ -11,7 +10,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +24,7 @@ public class BacklogController {
     @Autowired
     private ValidationErrorService errorService;
 
-    private static final Logger LOGGER = Logger.getLogger(ProjectTaskController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(BacklogController.class.getName());
 
     @PostMapping("/create/{backlog_id}")
     public ResponseEntity<?> addProjectTaskToBacklog(@Valid @RequestBody ProjectTask projectTask,
