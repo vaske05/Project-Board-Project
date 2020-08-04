@@ -16,7 +16,6 @@ import static com.vasic.project_board.security.SecurityConstants.SECRET;
 public class JwtTokenProvider {
 
     // Generate token
-
     public String generateToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());

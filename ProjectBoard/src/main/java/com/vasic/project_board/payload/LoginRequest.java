@@ -2,7 +2,7 @@ package com.vasic.project_board.payload;
 
 import javax.validation.constraints.NotBlank;
 
-public class LoginRequest {
+public class LoginRequest { // Object that comes as request when user try to login
 
     @NotBlank(message = "Username cannot be blank")
     private String username;

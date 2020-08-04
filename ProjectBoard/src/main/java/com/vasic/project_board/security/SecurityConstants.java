@@ -30,6 +30,4 @@ public class SecurityConstants {
             "/**/*.html",
             "/**/*.js"
     };
-
-
 }
