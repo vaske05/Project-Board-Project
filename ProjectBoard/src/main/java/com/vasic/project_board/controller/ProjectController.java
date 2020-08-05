@@ -11,6 +11,7 @@ import com.vasic.project_board.domain.Project;
 import com.vasic.project_board.service.ProjectService;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +29,12 @@ public class ProjectController {
 
 
     @PostMapping("/create")
-    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result) {
+    public ResponseEntity<?> createNewProject(@Valid @RequestBody Project project, BindingResult result, Principal principal) {
 
         ResponseEntity<?>errorMap = errorService.validateFields(result);
         if(errorMap != null) { return errorMap; }
 
-        Project createdProject = projectService.saveOrUpdateProject(project);
+        Project createdProject = projectService.saveOrUpdateProject(project, principal.getName());
         LOGGER.log(Level.INFO, "Project - created: " + project.getProjectName());
 
         return new ResponseEntity<Project>(createdProject, HttpStatus.CREATED);
