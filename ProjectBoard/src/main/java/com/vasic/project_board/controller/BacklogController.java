@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.security.Principal;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,12 +29,12 @@ public class BacklogController {
 
     @PostMapping("/create/{backlog_id}")
     public ResponseEntity<?> addProjectTaskToBacklog(@Valid @RequestBody ProjectTask projectTask,
-                                                     BindingResult result, @PathVariable String backlog_id) {
+                                                     BindingResult result, @PathVariable String backlog_id, Principal principal) {
 
         ResponseEntity<?> errorMap = errorService.validateFields(result);
         if(errorMap != null) { return errorMap; }
 
-        ProjectTask newProjectTask = projectTaskService.saveOrUpdateProjectTask(backlog_id, projectTask);
+        ProjectTask newProjectTask = projectTaskService.saveProjectTask(backlog_id, projectTask, principal.getName());
 
         LOGGER.log(Level.INFO, "Project task - created: summary = " + newProjectTask.getSummary());
 
@@ -42,9 +43,9 @@ public class BacklogController {
     }
 
     @GetMapping("/all/{backlog_id}") // project_identifier == backlog_identifier
-    public Iterable<ProjectTask> getProjectBacklog(@PathVariable String backlog_id) {
+    public Iterable<ProjectTask> getProjectBacklog(@PathVariable String backlog_id, Principal principal) {
 
-        return projectTaskService.findBacklogByIdentifier(backlog_id);
+        return projectTaskService.findBacklogByIdentifier(backlog_id, principal.getName());
     }
 
     @GetMapping("/get/{backlog_id}/{pt_id}") // project_identifier == backlog_identifier

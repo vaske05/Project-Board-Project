@@ -73,14 +73,14 @@ public class ProjectService {
         }
     }
 
-    public Project findProjectByIdentifier(String projectId, String username) {
+    public Project findProjectByIdentifier(String projectIdentifier, String username) {
 
         // Only want to return the project if the user looking for it is the owner
 
-        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
 
         if(project == null) {
-            throw new ProjectIdException("Project ID '" + projectId + "' does not exist");
+            throw new ProjectIdException("Project ID '" + projectIdentifier + "' does not exist");
         }
 
         if(!project.getProjectLeader().equals(username)) {

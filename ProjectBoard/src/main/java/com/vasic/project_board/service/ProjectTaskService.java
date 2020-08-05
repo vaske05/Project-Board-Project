@@ -15,19 +15,24 @@ import org.springframework.stereotype.Service;
 public class ProjectTaskService {
 
     @Autowired
-    ProjectTaskRepository projectTaskRepository;
+    private ProjectTaskRepository projectTaskRepository;
     @Autowired
-    BacklogRepository backlogRepository;
+
+    private BacklogRepository backlogRepository;
     @Autowired
-    ProjectRepository projectRepository;
 
-    public ProjectTask saveOrUpdateProjectTask(String backlog_id, ProjectTask projectTask) {
+    private ProjectRepository projectRepository;
 
-        try {
+    @Autowired
+    private ProjectService projectService;
+
+    public ProjectTask saveProjectTask(String backlog_id, ProjectTask projectTask, String username) { //projectIdentifier == backlog_id
+
+        /*try {*/
             //Exceptions: project not found
 
             //PTs to be added to a specific project
-            Backlog backlog = backlogRepository.findByProjectIdentifier(backlog_id);
+            Backlog backlog = projectService.findProjectByIdentifier(backlog_id, username).getBacklog();
             //Set the BL to PT
             projectTask.setBacklog(backlog);
 
@@ -42,7 +47,7 @@ public class ProjectTaskService {
             projectTask.setProjectIdentifier(backlog_id);
 
             // INITIAL priority when priority is NULL
-            if(projectTask.getPriority() == 0 || projectTask.getPriority() == null) {
+            if(projectTask.getPriority() == null || projectTask.getPriority() == 0) {
                 projectTask.setPriority(3);
             }
 
@@ -53,9 +58,9 @@ public class ProjectTaskService {
 
             return projectTaskRepository.save(projectTask);
 
-        } catch (Exception e) {
+       /* } catch (Exception e) {
             throw new ProjectNotFoundException("Project not found!");
-        }
+        }*/
 
     }
 
@@ -72,11 +77,8 @@ public class ProjectTaskService {
         projectTaskRepository.delete(projectTask);
     }
 
-    public Iterable<ProjectTask> findBacklogByIdentifier(String backlogId) {
-        Project project = projectRepository.findByProjectIdentifier(backlogId); // projectIdentifier = backlogId
-        if(project == null) {
-            throw new ProjectNotFoundException("Project wit ID: '" + backlogId + "' does not exist");
-        }
+    public Iterable<ProjectTask> findBacklogByIdentifier(String backlogId, String username) {
+        projectService.findProjectByIdentifier(backlogId, username);
 
         return projectTaskRepository.findByProjectIdentifierOrderByPriority(backlogId);
     }
