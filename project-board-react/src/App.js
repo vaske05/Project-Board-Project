@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap import
-import Navbar from './components/Navbar';
 import AddProjectTask from './components/ProjectBoard/ProjectTask/AddProjectTask';
 import UpdateProjectTask from './components/ProjectBoard/ProjectTask/UpdateProjectTask';
 import { BrowserRouter as Router, Route } from "react-router-dom";
