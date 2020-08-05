@@ -5,24 +5,26 @@ import io.jsonwebtoken.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.vasic.project_board.security.SecurityConstants.EXPIRATION_TIME;
-import static com.vasic.project_board.security.SecurityConstants.SECRET;
+import static com.vasic.project_board.security.SecurityConstants.*;
 
 @Component
 public class JwtTokenProvider {
 
-    // Generate token
+
+
+    /*
+     * Method which generate token
+     */
     public String generateToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         Date now = new Date(System.currentTimeMillis());
 
-        Date nowDate = new Date(now.getTime());
-
-        Date expiryDate = new Date(now.getTime() + EXPIRATION_TIME);
+        Date expirationDate = generateExpirationDate();
 
         String userId = Long.toString(user.getId());
 
@@ -35,12 +37,14 @@ public class JwtTokenProvider {
                 .setSubject(userId)
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(expiryDate)
+                .setExpiration(expirationDate)
                 .signWith(SignatureAlgorithm.HS512, SECRET)
                 .compact();
     }
 
-    // Validate token
+    /*
+     * Token validation
+     */
     public boolean validateToken(String token) {
         try {
             Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token);
@@ -64,10 +68,25 @@ public class JwtTokenProvider {
         return false;
     }
 
-    // Get user id from token
+    /*
+     * Get user id from token
+     */
     public Long getUserIdFromJwt(String token) {
         Claims claims = Jwts.parser().setSigningKey(SECRET).parseClaimsJws(token).getBody();
         String id = (String)(claims.get("id"));
         return Long.parseLong(id);
+    }
+
+    /*
+     * Method which generate expiration date
+     */
+    public Date generateExpirationDate() {
+        Calendar calendar = Calendar.getInstance();
+        Date nowDate = new Date();
+        calendar.setTime(nowDate);
+        calendar.add(Calendar.HOUR, EXPIRATION_TIME_IN_HOURS);
+        calendar.add(Calendar.HOUR, EXPIRATION_TIME_IN_MINUTES);
+
+        return calendar.getTime();
     }
 }
