@@ -20,10 +20,13 @@ import java.util.logging.Logger;
 @RequestMapping("/api/project")
 public class ProjectController {
 
-    @Autowired
     ProjectService projectService;
-    @Autowired
     ValidationErrorService errorService;
+
+    ProjectController(ProjectService projectService, ValidationErrorService errorService) {
+        this.projectService = projectService;
+        this.errorService = errorService;
+    }
 
     private static final Logger LOGGER = Logger.getLogger(ProjectController.class.getName());
 

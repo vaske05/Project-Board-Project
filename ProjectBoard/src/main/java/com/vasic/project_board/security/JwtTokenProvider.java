@@ -15,8 +15,6 @@ import static com.vasic.project_board.security.SecurityConstants.*;
 @Component
 public class JwtTokenProvider {
 
-
-
     /*
      * Method which generate token
      */

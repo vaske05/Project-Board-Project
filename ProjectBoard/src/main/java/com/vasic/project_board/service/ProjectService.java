@@ -8,20 +8,22 @@ import com.vasic.project_board.exceptions.ProjectNotFoundException;
 import com.vasic.project_board.repository.BacklogRepository;
 import com.vasic.project_board.repository.ProjectRepository;
 import com.vasic.project_board.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ProjectService {
 
-    @Autowired
-    private ProjectRepository projectRepository;
+    private final ProjectRepository projectRepository;
 
-    @Autowired
-    private BacklogRepository backlogRepository;
+    private final BacklogRepository backlogRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
+
+    ProjectService(ProjectRepository projectRepository, BacklogRepository backlogRepository, UserRepository userRepository) {
+        this.projectRepository = projectRepository;
+        this.backlogRepository = backlogRepository;
+        this.userRepository = userRepository;
+    }
 
 
     public Iterable<Project> findAllProjects(String username) {
@@ -67,16 +69,13 @@ public class ProjectService {
 
             return projectRepository.save(project);
         } catch (Exception e) {
-            ProjectIdException projectIdException =
-                    new ProjectIdException("Project ID '"+project.getProjectIdentifier()+"' already exists ");
-            throw projectIdException; // Calling CustomResponseEntityExceptionHandler
+            throw new ProjectIdException("Project ID '"+project.getProjectIdentifier()+"' already exists "); // Calling CustomResponseEntityExceptionHandler
         }
     }
 
     public Project findProjectByIdentifier(String projectIdentifier, String username) {
 
         // Only want to return the project if the user looking for it is the owner
-
         Project project = projectRepository.findByProjectIdentifier(projectIdentifier.toUpperCase());
 
         if(project == null) {
