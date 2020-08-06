@@ -22,16 +22,13 @@ function App() {
       <Router>
         <div className="App">
           <Header/>
+          
           { /* Public Routes */ }
-
           <Route exact path="/" component={Landing}></Route>
           <Route exact path="/register" component={Register}></Route>
           <Route exact path="/login" component={Login}></Route>
 
-          {
-            //Private Routes
-
-          }
+          {/*Private Routes*/}
           <Route exact path="/dashboard" component={Dashboard} />
 
           <Route exact path="/addProject" component={AddProject}/>

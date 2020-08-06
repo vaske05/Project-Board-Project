@@ -21,7 +21,7 @@ public class User implements UserDetails {
     private Long id;
 
     @Email(message = "Username needs to be an email")
-    @NotBlank(message = "username is required")
+    @NotBlank(message = "Please enter your email(username)")
     @Column(length = 40, unique = true)
     private String username;
 

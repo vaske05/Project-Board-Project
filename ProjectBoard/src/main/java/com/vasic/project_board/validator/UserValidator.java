@@ -13,7 +13,7 @@ public class UserValidator implements Validator {
     }
 
     @Override
-    public void validate(Object object, Errors errors) {
+    public void validate(Object object, Errors errors) { // Validating confirm password and password length
 
         User user = (User) object;
         if(user.getPassword().length() < 6) {

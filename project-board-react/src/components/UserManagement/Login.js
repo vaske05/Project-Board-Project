@@ -18,7 +18,7 @@ class Login extends Component {
                                     <input type="password" className="form-control form-control-lg"
                                            placeholder="Password" name="password"/>
                                 </div>
-                                <input type="submit" className="btn btn-info btn-block mt-4"/>
+                                <input type="submit" className="btn btn-info btn-block mt-4 font-weight-bold" value="Log In"/>
                             </form>
                         </div>
                     </div>
