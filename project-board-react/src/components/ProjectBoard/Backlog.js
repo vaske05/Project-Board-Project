@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ProjectTaskItem from './ProjectTask/ProjectTaskItem';
 import { status } from '../../constants';
 import { getProjectTask, addProjectTask, getBacklog } from '../../actions/backlogActions';
-import { mapTaskStatus, removeClass } from '../../helpers';
+import { mapTaskStatus } from '../../helpers';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 

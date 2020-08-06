@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import ProjecItem from "./Project/ProjecItem";
 import CreateProjectButton from "./Project/CreateProjectButton";
 import PropTypes from 'prop-types';
