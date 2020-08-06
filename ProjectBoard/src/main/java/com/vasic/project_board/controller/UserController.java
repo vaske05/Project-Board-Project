@@ -7,7 +7,6 @@ import com.vasic.project_board.security.JwtTokenProvider;
 import com.vasic.project_board.service.UserService;
 import com.vasic.project_board.service.ValidationErrorService;
 import com.vasic.project_board.validator.UserValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,20 +27,20 @@ import static com.vasic.project_board.security.SecurityConstants.TOKEN_PREFIX;
 @RequestMapping("api/users")
 public class UserController {
 
-    @Autowired
-    private ValidationErrorService errorService;
+    private final ValidationErrorService errorService;
+    private final UserService userService;
+    private final UserValidator userValidator;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private UserValidator userValidator;
-
-    @Autowired
-    private JwtTokenProvider jwtTokenProvider;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    UserController(ValidationErrorService errorService, UserService userService, UserValidator userValidator,
+                   JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
+        this.errorService = errorService;
+        this.userService = userService;
+        this.userValidator = userValidator;
+        this.jwtTokenProvider = jwtTokenProvider;
+        this.authenticationManager = authenticationManager;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest, BindingResult bindingResult) {
@@ -62,7 +61,6 @@ public class UserController {
 
         return ResponseEntity.ok(new JWTLoginSuccessResponse(true, jwt));
     }
-
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@Valid @RequestBody User user, BindingResult bindingResult) {
