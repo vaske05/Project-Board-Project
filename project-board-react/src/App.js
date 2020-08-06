@@ -1,4 +1,5 @@
-import React from 'react';
+
+import React, {Component} from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap import
 import AddProjectTask from './components/ProjectBoard/ProjectTask/AddProjectTask';
@@ -14,6 +15,24 @@ import ProjectBoard from './components/ProjectBoard/ProjectBoard';
 import Landing from "./components/Layout/Landing";
 import Register from "./components/UserManagement/Register";
 import Login from "./components/UserManagement/Login";
+import jwt_decode from 'jwt-decode';
+import setJwtToken from "./securityUtils/setJwtToken";
+import {SET_CURRENT_USER} from "./actions/types";
+
+const token = localStorage.getItem("jwtToken");
+if(token) {
+  setJwtToken(token);
+  const decodedToken = jwt_decode(token);
+  store.dispatch({
+    type: SET_CURRENT_USER,
+    payload: decodedToken
+  });
+  const currentTime = Date.now()/1000;
+  if(decodedToken.exp < currentTime) {
+    //handle logout
+    window.location.href = "/";
+  }
+}
 
 function App() {
   return (

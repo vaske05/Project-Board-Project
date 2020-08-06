@@ -18,13 +18,6 @@ export default function (state=initial_state, action) {
     switch (action.type) {
         case SET_CURRENT_USER:
 
-            const test = {
-                ...state,
-                isAuthenticated: isAuthenticated(action.payload),
-                user: action.payload
-            };
-            console.log(test);
-
             return {
                 ...state,
                 isAuthenticated: isAuthenticated(action.payload),
