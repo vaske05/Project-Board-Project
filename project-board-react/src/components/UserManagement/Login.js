@@ -20,6 +20,9 @@ class Login extends Component {
         if(nextProps.security.isAuthenticated) {
             this.props.history.push("/dashboard");
         }
+        if(nextProps.errors) {
+            this.setState({errors:nextProps.errors});
+        }
     }
 
     onChange = (e) => {
@@ -32,7 +35,7 @@ class Login extends Component {
             username: this.state.username,
             password: this.state.password
         }
-        this.props.login(LoginRequest);
+        this.props.login(LoginRequest, this.props.history);
     }
 
     render() {
@@ -84,6 +87,7 @@ class Login extends Component {
 
 Login.propTypes = {
     login: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 

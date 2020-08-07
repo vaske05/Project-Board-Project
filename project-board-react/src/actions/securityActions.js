@@ -7,7 +7,9 @@ import jwt_decode from 'jwt-decode';
 const USER_REGISTRATION_PATH = "/api/users/register";
 const USER_LOGIN_PATH = "/api/users/login";
 
-
+/*
+ * User registration
+ */
 export const createNewUser = (newUser, history) => async dispatch => {
     try {
         await axios.post(USER_REGISTRATION_PATH, newUser);
@@ -25,7 +27,10 @@ export const createNewUser = (newUser, history) => async dispatch => {
     }
 }
 
-export const login = LoginRequest => async dispatch => {
+/*
+ * User login
+ */
+export const login = (LoginRequest, history) => async dispatch => {
 
     try {
         // post => LoginRequest
@@ -43,6 +48,9 @@ export const login = LoginRequest => async dispatch => {
             type: SET_CURRENT_USER,
             payload: decodedToken
         });
+        //Automatic logout when token gets expired
+        //dispatch(automaticLogout(decodedToken.exp));
+        automaticLogout(decodedToken.exp, history)(dispatch)
     }
     catch (error) {
         dispatch({
@@ -50,4 +58,30 @@ export const login = LoginRequest => async dispatch => {
             payload: error.response.data
         });
     }
+}
+
+/*
+ * User logout
+ */
+export const logout = (history) => async dispatch => {
+    localStorage.removeItem("jwtToken"); // remove token from local storage
+    setJwtToken(false); // Delete header
+    dispatch({
+        type: SET_CURRENT_USER,
+        payload: {} // empty payload(no token)
+    });
+    history ? history.push("/") : window.location.href = "/";
+}
+
+/*
+ * Timer function for User logout when token gets expired
+ */
+const automaticLogout = (expTime, history) => dispatch => {
+    const currentTime = Date.now() / 1000;
+    const remainingTime = expTime - currentTime;
+
+    setTimeout(() => {
+        //dispatch(logout())
+        logout(history)(dispatch)
+    }, remainingTime*1000);
 }

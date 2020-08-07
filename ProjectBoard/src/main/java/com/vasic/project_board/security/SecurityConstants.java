@@ -6,8 +6,10 @@ public class SecurityConstants {
     public static final String SECRET = "SecretKeyToGenJwts";
     public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
-    public static final int EXPIRATION_TIME_IN_HOURS = 1;
+
+    public static final int EXPIRATION_TIME_IN_HOURS = 0;
     public static final int EXPIRATION_TIME_IN_MINUTES = 0;
+    public static final int EXPIRATION_TIME_IN_SECONDS = 30;
 
 
     public static final String[] PUBLIC_MATCHERS = {

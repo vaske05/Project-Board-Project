@@ -1,4 +1,3 @@
-
 import React, {Component} from 'react';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css"; // Bootstrap import
@@ -18,7 +17,11 @@ import Login from "./components/UserManagement/Login";
 import jwt_decode from 'jwt-decode';
 import setJwtToken from "./securityUtils/setJwtToken";
 import {SET_CURRENT_USER} from "./actions/types";
+import {logout} from "./actions/securityActions";
 
+
+
+// Set token when page gets reloaded
 const token = localStorage.getItem("jwtToken");
 if(token) {
   setJwtToken(token);
@@ -27,11 +30,6 @@ if(token) {
     type: SET_CURRENT_USER,
     payload: decodedToken
   });
-  const currentTime = Date.now()/1000;
-  if(decodedToken.exp < currentTime) {
-    //handle logout
-    window.location.href = "/";
-  }
 }
 
 function App() {

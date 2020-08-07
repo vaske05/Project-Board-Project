@@ -73,3 +73,7 @@ img {
 .greenPrimary {
     background-color: #231F20;
 }
+
+.cursorPointer {
+  cursor: pointer;
+}

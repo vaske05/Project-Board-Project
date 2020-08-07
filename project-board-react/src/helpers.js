@@ -1,7 +1,5 @@
 import { statusDivs, status } from "./constants";
 
-
-
 export function mapTaskStatus(targetDiv) {
     switch(targetDiv) {
         case statusDivs.done:
@@ -27,4 +25,13 @@ export function removeClass(divs, className) {
         const element = divs[index];
         element.classList.remove(className);
     }
+}
+
+export function isEmpty(obj) {
+    for(let prop in obj) {
+        if(obj.hasOwnProperty(prop)) {
+            return false;
+        }
+    }
+    return JSON.stringify(obj) === JSON.stringify({});
 }

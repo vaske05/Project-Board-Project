@@ -6,7 +6,6 @@ import {deleteProject} from "../../actions/projectActions";
 
 
 class ProjecItem extends Component {
-  //next 22
 
   onDeleteClick = projectIdentifier => {
     this.props.deleteProject(projectIdentifier);
