@@ -3,14 +3,10 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteProjectTask } from "../../../actions/backlogActions";
-import { addClass } from '../../../helpers';
 
 
 class ProjectTaskItem extends Component {
 
-    constructor() {
-        super();
-    }
 
     onDeleteClick(backlog_id, pt_id) {
         this.props.deleteProjectTask(backlog_id, pt_id);

@@ -8,3 +8,5 @@ export const GET_PROJECT_TASK = "GET_PROJECT_TASK";
 export const GET_PROJECT = "GET_PROJECT";
 export const DELETE_PROJECT = "DELETE_PROJECT";
 export const GET_PROJECTS = "GET_PROJECTS";
+// User
+export const SET_CURRENT_USER = "SET_CURRENT_USER";

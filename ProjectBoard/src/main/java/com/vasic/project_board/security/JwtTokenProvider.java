@@ -29,7 +29,7 @@ public class JwtTokenProvider {
         Map<String, Object> claims = new HashMap<>();
         claims.put("id", (userId));
         claims.put("username", user.getUsername());
-        claims.put("fullname", user.getFullName());
+        claims.put("fullName", user.getFullName());
 
         return Jwts.builder()
                 .setSubject(userId)
@@ -83,7 +83,8 @@ public class JwtTokenProvider {
         Date nowDate = new Date();
         calendar.setTime(nowDate);
         calendar.add(Calendar.HOUR, EXPIRATION_TIME_IN_HOURS);
-        calendar.add(Calendar.HOUR, EXPIRATION_TIME_IN_MINUTES);
+        calendar.add(Calendar.MINUTE, EXPIRATION_TIME_IN_MINUTES);
+        calendar.add(Calendar.SECOND, EXPIRATION_TIME_IN_SECONDS);
 
         return calendar.getTime();
     }
