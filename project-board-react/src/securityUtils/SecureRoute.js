@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 const SecuredRoute = ({component: Component, security, ...otherProps}) => (
     <Route {...otherProps}
            render={props =>
-               security.isAuthenticated === true ? (<Component {...props}></Component>) : (<Redirect to="login"></Redirect>)} />
+               security.isAuthenticated === true ? (<Component {...props}></Component>) : (<Redirect to="/"></Redirect>)} />
 );
 
 SecuredRoute.propTypes = {

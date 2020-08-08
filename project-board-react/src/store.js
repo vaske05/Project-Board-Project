@@ -8,7 +8,7 @@ const middleware = [thunk];
 
 const ReactReduxDevTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-var store;
+let store;
 
 if( (window.navigator.userAgent.includes("Chrome") || window.navigator.userAgent.includes("Mozilla") ) && ReactReduxDevTools) {
     store = createStore(

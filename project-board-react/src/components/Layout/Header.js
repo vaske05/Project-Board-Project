@@ -12,7 +12,7 @@ class Header extends Component {
   }
 
   logout() {
-    this.props.logout();
+    this.props.logout(this.props.history);
   }
 
   render() {
@@ -37,9 +37,9 @@ class Header extends Component {
               </Link>
             </li>
             <li className="nav-item cursorPointer">
-              <h7 className="nav-link"  onClick={this.logout.bind(this)}>
+              <i className="nav-link" onClick={this.logout.bind(this)}>
                 Logout
-              </h7>
+              </i>
             </li>
           </ul>
         </div>
@@ -73,12 +73,9 @@ class Header extends Component {
       headerLinks = userIsNotAuthenticated;
     }
 
-
     return (
       <nav className="navbar navbar-expand-sm navbar-dark greenPrimary mb-4">
         <div className="container">
-
-          
           <button
             className="navbar-toggler"
             type="button"

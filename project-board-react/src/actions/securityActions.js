@@ -2,6 +2,7 @@ import axios from "axios";
 import {GET_ERRORS, SET_CURRENT_USER} from "./types";
 import setJwtToken from "../securityUtils/setJwtToken";
 import jwt_decode from 'jwt-decode';
+import {isEmpty} from "../helpers";
 
 //Endpoint urls
 const USER_REGISTRATION_PATH = "/api/users/register";
@@ -70,7 +71,10 @@ export const logout = (history) => async dispatch => {
         type: SET_CURRENT_USER,
         payload: {} // empty payload(no token)
     });
-    history ? history.push("/") : window.location.href = "/";
+    //history ? history.push("/"): window.location.href = "/";
+    if(history) {
+        history.push("/")
+    }
 }
 
 /*

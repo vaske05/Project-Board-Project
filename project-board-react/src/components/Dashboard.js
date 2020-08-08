@@ -23,7 +23,7 @@ class Dashboard extends Component {
      if(!this.props.security.isAuthenticated) {
        this.props.history.push("/");
      } else {
-       setTimeout(this.handleLoading, 1000);
+       setTimeout(this.handleLoading, 800);
      }
 
   }
