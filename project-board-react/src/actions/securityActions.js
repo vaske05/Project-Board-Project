@@ -50,7 +50,7 @@ export const login = (LoginRequest, history) => async dispatch => {
         });
         //Automatic logout when token gets expired
         //dispatch(automaticLogout(decodedToken.exp));
-        automaticLogout(decodedToken.exp, history)(dispatch)
+        startLogoutTimer(decodedToken.exp, history)(dispatch)
     }
     catch (error) {
         dispatch({
@@ -76,7 +76,7 @@ export const logout = (history) => async dispatch => {
 /*
  * Timer function for User logout when token gets expired
  */
-const automaticLogout = (expTime, history) => dispatch => {
+export const startLogoutTimer = (expTime, history) => dispatch => {
     const currentTime = Date.now() / 1000;
     const remainingTime = expTime - currentTime;
 

@@ -20,7 +20,12 @@ class Dashboard extends Component {
   }
 
    componentDidMount() {
-     setTimeout(this.handleLoading, 1000);
+     if(!this.props.security.isAuthenticated) {
+       this.props.history.push("/");
+     } else {
+       setTimeout(this.handleLoading, 1000);
+     }
+
   }
   
   async handleLoading() {
@@ -56,7 +61,7 @@ class Dashboard extends Component {
                 
               
                 /* End of Project Item Component */
-              }
+               }
 
             </div>
           </div>
@@ -68,11 +73,13 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   gelAllProjects: PropTypes.func.isRequired,
-  project:  PropTypes.object.isRequired
+  project:  PropTypes.object.isRequired,
+  security: PropTypes.object.isRequired
 }
 
 const mapStateToProps = state => ({
-  project: state.project // from index.js - combine reducers
+  project: state.project, // from index.js - combine reducers
+  security: state.security
 })
 
 export default connect(mapStateToProps, { gelAllProjects })(Dashboard);

@@ -18,6 +18,12 @@ class Register extends Component {
         };
     }
 
+    componentDidMount() {
+        if(this.props.security.isAuthenticated) {
+            this.props.history.push("/dashboard");
+        }
+    }
+
     onChange = (e) => {
         this.setState({[e.target.name]: e.target.value});
     }
@@ -118,10 +124,12 @@ class Register extends Component {
 
 Register.propTypes = {
     createNewUser: PropTypes.func.isRequired,
+    security: PropTypes.object.isRequired,
     errors: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
+    security: state.security,
     errors: state.errors
 });
 

@@ -16,6 +16,13 @@ class Login extends Component {
         }
     }
 
+    // If user is loggedIn, they cannot go to the login page
+    componentDidMount() {
+        if(this.props.security.isAuthenticated) {
+            this.props.history.push("/dashboard");
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         if(nextProps.security.isAuthenticated) {
             this.props.history.push("/dashboard");

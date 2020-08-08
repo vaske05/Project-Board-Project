@@ -17,11 +17,11 @@ import Login from "./components/UserManagement/Login";
 import jwt_decode from 'jwt-decode';
 import setJwtToken from "./securityUtils/setJwtToken";
 import {SET_CURRENT_USER} from "./actions/types";
-import {logout} from "./actions/securityActions";
+import {startLogoutTimer} from "./actions/securityActions";
 
-
-
-// Set token when page gets reloaded
+/*
+ * Set token and start timer logout when page gets reloaded
+ */
 const token = localStorage.getItem("jwtToken");
 if(token) {
   setJwtToken(token);
@@ -30,6 +30,7 @@ if(token) {
     type: SET_CURRENT_USER,
     payload: decodedToken
   });
+  startLogoutTimer(decodedToken.exp)(store.dispatch);
 }
 
 function App() {
@@ -39,7 +40,7 @@ function App() {
       <Router>
         <div className="App">
           <Header/>
-          
+
           { /* Public Routes */ }
           <Route exact path="/" component={Landing}></Route>
           <Route exact path="/register" component={Register}></Route>
