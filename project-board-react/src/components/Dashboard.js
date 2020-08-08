@@ -50,7 +50,6 @@ class Dashboard extends Component {
               <hr />
 
               {
-                
                 /* Project Item Component */
                 
                 //If data is loaded show "No projects found" or found projects. Otherwise show loader animation
@@ -58,8 +57,7 @@ class Dashboard extends Component {
                   projects.map(project=> (
                     <ProjecItem key={project.id} project={project}></ProjecItem>
                   ))) : (<Loader></Loader>)
-                
-              
+
                 /* End of Project Item Component */
                }
 

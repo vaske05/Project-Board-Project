@@ -48,7 +48,7 @@ export const login = (LoginRequest, history) => async dispatch => {
             type: SET_CURRENT_USER,
             payload: decodedToken
         });
-        //Automatic logout when token gets expired
+        //Timer logout when token gets expired
         //dispatch(automaticLogout(decodedToken.exp));
         startLogoutTimer(decodedToken.exp, history)(dispatch)
     }
