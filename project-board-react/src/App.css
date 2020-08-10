@@ -77,3 +77,11 @@ img {
 .cursorPointer {
   cursor: pointer;
 }
+
+.normal-font-style {
+  font-style: normal;
+}
+
+.italic-font-style {
+  font-style: italic;
+}
