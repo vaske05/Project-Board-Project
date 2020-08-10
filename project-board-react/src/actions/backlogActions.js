@@ -2,11 +2,11 @@ import axios from "axios";
 import { GET_ERRORS, GET_BACKLOG, DELETE_PROJECT_TASK, GET_PROJECT_TASK } from "./types";
 
 //Endpoint urls
-const createTaskPath = "/api/backlog/create";
-const updateTaskPath = "/api/backlog/update";
-const getTasksPath = "/api/backlog/all";
-const deleteTaskPath = "/api/backlog/delete";
-const getTaskPath = "/api/backlog/get";
+const CREATE_TASK_PATH = "/api/backlog/create";
+const UPDATE_TASK_PATH = "/api/backlog/update";
+const GET_TASKS_PATH = "/api/backlog/all";
+const DELETE_TASK_PATH = "/api/backlog/delete";
+const GET_TASK_PATH = "/api/backlog/get";
 
 /*
 * Http Post request to add new project task
@@ -14,7 +14,7 @@ const getTaskPath = "/api/backlog/get";
 export const addProjectTask = (backlog_id, project_task, history) => async dispatch => {
 
     try {
-        await axios.post(createTaskPath + `/${backlog_id}`, project_task);
+        await axios.post(CREATE_TASK_PATH + `/${backlog_id}`, project_task);
         history.push(`/projectBoard/${backlog_id}`); //Redirect to project board page
         dispatch({
             type: GET_ERRORS,
@@ -35,7 +35,7 @@ export const addProjectTask = (backlog_id, project_task, history) => async dispa
 export const getBacklog = (backlog_id) => async dispatch => {
 
     try {
-        const res = await axios.get(getTasksPath + `/${backlog_id}`);
+        const res = await axios.get(GET_TASKS_PATH + `/${backlog_id}`);
         dispatch({
             type: GET_BACKLOG,
             payload: res.data
@@ -54,7 +54,7 @@ export const getBacklog = (backlog_id) => async dispatch => {
 export const deleteProjectTask = (backlog_id, pt_id) => async dispatch => {
     if( (window.confirm(`Are you sure to delete task ${pt_id}`)) ) {
         
-        await axios.delete(deleteTaskPath + `/${backlog_id}/${pt_id}`);
+        await axios.delete(DELETE_TASK_PATH + `/${backlog_id}/${pt_id}`);
         dispatch({
             type: DELETE_PROJECT_TASK,
             payload: pt_id
@@ -67,7 +67,7 @@ export const deleteProjectTask = (backlog_id, pt_id) => async dispatch => {
 */
 export const getProjectTask = (backlog_id, pt_id, history) => async dispatch => {
     try {
-        const res = await axios.get(getTaskPath+ `/${backlog_id}/${pt_id}`);
+        const res = await axios.get(GET_TASK_PATH+ `/${backlog_id}/${pt_id}`);
         dispatch({
             type: GET_PROJECT_TASK,
             payload: res.data
@@ -83,7 +83,7 @@ export const getProjectTask = (backlog_id, pt_id, history) => async dispatch => 
 export const updateProjectTask = (backlog_id, pt_id, project_task, history) => async dispatch => {
 
     try {
-        await axios.patch(updateTaskPath + `/${backlog_id}/${pt_id}`, project_task);
+        await axios.patch(UPDATE_TASK_PATH + `/${backlog_id}/${pt_id}`, project_task);
         history.push(`/projectBoard/${backlog_id}`); //Redirect to project board page
         dispatch({
             type: GET_ERRORS,

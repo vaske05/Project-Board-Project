@@ -2,11 +2,12 @@ import axios from "axios";
 import {GET_ERRORS, SET_CURRENT_USER} from "./types";
 import setJwtToken from "../securityUtils/setJwtToken";
 import jwt_decode from 'jwt-decode';
-import {isEmpty} from "../helpers";
 
 //Endpoint urls
 const USER_REGISTRATION_PATH = "/api/users/register";
 const USER_LOGIN_PATH = "/api/users/login";
+
+let timeoutId;
 
 /*
  * User registration
@@ -49,6 +50,11 @@ export const login = (LoginRequest, history) => async dispatch => {
             type: SET_CURRENT_USER,
             payload: decodedToken
         });
+        //Clear errors in state
+        dispatch({
+            type: GET_ERRORS,
+            payload: {}
+        });
         //Timer logout when token gets expired
         //dispatch(automaticLogout(decodedToken.exp));
         startLogoutTimer(decodedToken.exp, history)(dispatch)
@@ -65,13 +71,13 @@ export const login = (LoginRequest, history) => async dispatch => {
  * User logout
  */
 export const logout = (history) => async dispatch => {
+    clearTimeout(timeoutId); // turn off logout timer function
     localStorage.removeItem("jwtToken"); // remove token from local storage
     setJwtToken(false); // Delete header
     dispatch({
         type: SET_CURRENT_USER,
         payload: {} // empty payload(no token)
     });
-    //history ? history.push("/"): window.location.href = "/";
     if(history) {
         history.push("/")
     }
@@ -84,7 +90,7 @@ export const startLogoutTimer = (expTime, history) => dispatch => {
     const currentTime = Date.now() / 1000;
     const remainingTime = expTime - currentTime;
 
-    setTimeout(() => {
+    timeoutId = setTimeout(() => {
         //dispatch(logout())
         logout(history)(dispatch)
     }, remainingTime*1000);
